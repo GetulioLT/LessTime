@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "527154604128",
+    "firebase_url": "https://lesstime-2f103-default-rtdb.firebaseio.com",
+    "project_id": "lesstime-2f103",
+    "storage_bucket": "lesstime-2f103.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527154604128:android:19701180f56f4fae867b05",
+        "android_client_info": {
+          "package_name": "com.example.meuprojeto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527154604128-849bo5qgo77viag6ibd0sepm9kkvio72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfu8IzSm_fwY73GH5tffOd7QYSXp5ckt0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527154604128-849bo5qgo77viag6ibd0sepm9kkvio72.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

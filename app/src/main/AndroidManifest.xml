@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.meuprojeto">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/nossa_logo1"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/nossa_logo1"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Cadastro_Produtos"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".Historico_Saida"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".Historico_Entrada"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".Estoque"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".Tela_dos_pedidos"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".Solicitacao"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".cadastroteste"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
