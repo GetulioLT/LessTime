@@ -2,7 +2,6 @@ package com.example.meuprojeto;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -29,15 +28,16 @@ public class cadastroteste extends AppCompatActivity {
 
     ////Declarando Variáveis
 
-    private Button BtnVoltar_Cadastro;
-    private EditText EdtUsuario_Cadastro;
-    private EditText EdtEmail_Cadastro;
-    private EditText EdtMatricula_Cadastro;
-    private EditText EdtTelefone_Cadastro;
-    private EditText EdtSenha_Cadastro;
-    private EditText EdtConfirmarSenha_Cadastro;
+    private Button BtnVoltar_Cadastro, BtnCadastrar;
+
+    private EditText EdtUsuario_Cadastro, EdtEmail_Cadastro, EdtMatricula_Cadastro,
+            EdtTelefone_Cadastro, EdtSenha_Cadastro, EdtConfirmarSenha_Cadastro;
+
     private CheckBox CbMostrarSenha_Cadastro;
-    private Button BtnCadastro;
+
+    String[] mensagens = {"Preencha Todos os Campos","Cadastro Realizado com Sucesso",
+            "Senhas não coincidem","Usuario já Cadastrado"};
+
     private ProgressBar tProgressBar;
     private FirebaseAuth mAuth;
     private FirebaseDatabase Database;
@@ -55,26 +55,7 @@ public class cadastroteste extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastroteste);
 
-        ////Registrando Id das variáveis
-
-        mAuth = FirebaseAuth.getInstance();
-        Reference = Database.getInstance().getReference().child("User");
-
-        BtnVoltar_Cadastro = findViewById(R.id.BtnVoltar_Cadastro);
-        EdtUsuario_Cadastro = findViewById(R.id.EdtUsuario_Cadastro);
-        EdtEmail_Cadastro = findViewById(R.id.EdtEmail_Cadastro);
-        EdtMatricula_Cadastro = findViewById(R.id.EdtMatricula_Cadastro);
-        EdtTelefone_Cadastro = findViewById(R.id.EdtTelefone_Cadastro);
-        EdtSenha_Cadastro = findViewById(R.id.EdtSenha_Cadastro);
-        EdtConfirmarSenha_Cadastro = findViewById(R.id.EdtConfirmarSenha_Cadastro);
-        CbMostrarSenha_Cadastro = findViewById(R.id.CbMostrarSenha_Cadastro);
-        BtnCadastro = findViewById(R.id.BtnCadastro);
-        tProgressBar = findViewById(R.id.tProgressBar);
-        Rgrp = findViewById(R.id.RGrp);
-        Almoxarife = findViewById(R.id.RBtnAlmoxarife);
-        Solicitante = findViewById(R.id.RBtnSolicitante);
-
-        Cadastro_Info = new Cadastro_Info();
+        IniciarComponentes();
 
         ////Mostrar Senha
 
@@ -82,15 +63,21 @@ public class cadastroteste extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (CbMostrarSenha_Cadastro.isChecked()){
-                    EdtSenha_Cadastro.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    EdtConfirmarSenha_Cadastro.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    EdtSenha_Cadastro.setTransformationMethod
+                            (HideReturnsTransformationMethod.getInstance());
+                    EdtConfirmarSenha_Cadastro.setTransformationMethod
+                            (HideReturnsTransformationMethod.getInstance());
                 }
                 else {
-                    EdtSenha_Cadastro.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    EdtConfirmarSenha_Cadastro.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    EdtSenha_Cadastro.setTransformationMethod
+                            (PasswordTransformationMethod.getInstance());
+                    EdtConfirmarSenha_Cadastro.setTransformationMethod
+                            (PasswordTransformationMethod.getInstance());
                 }
             }
         });
+
+        ////Voltar tela Inicial
 
         BtnVoltar_Cadastro.setOnClickListener(new View.OnClickListener() {
 
@@ -102,7 +89,34 @@ public class cadastroteste extends AppCompatActivity {
             }
         });
 
-        BtnCadastro.setOnClickListener(new View.OnClickListener() {
+        BtnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String Nome = EdtUsuario_Cadastro.getText().toString();
+                String Email = EdtEmail_Cadastro.getText().toString();
+                String Matricula = EdtMatricula_Cadastro.getText().toString();
+                String Telefone = EdtTelefone_Cadastro.getText().toString();
+                String Senha = EdtSenha_Cadastro.getText().toString();
+                String CSenha = EdtConfirmarSenha_Cadastro.getText().toString();
+                String Almo = Almoxarife.getText().toString();
+                String Soli = Solicitante.getText().toString();
+
+
+               if (Nome.isEmpty() || Email.isEmpty() || Matricula.isEmpty() || Telefone.isEmpty()
+                       || Senha.isEmpty() || CSenha.isEmpty()) {
+
+                   alert(mensagens[0]);
+
+               }else {
+                   CadastrarUsuario();
+                   tProgressBar.setVisibility(View.INVISIBLE);
+               }
+
+            }
+        });
+
+        /*BtnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -126,10 +140,17 @@ public class cadastroteste extends AppCompatActivity {
                 String Senha = EdtSenha_Cadastro.getText().toString();
                 String ConfirmarSenha = EdtConfirmarSenha_Cadastro.getText().toString();
 
-                if (!TextUtils.isEmpty(Cadastro_Info.getEmail()) && !TextUtils.isEmpty(Cadastro_Info.getUsuario()) && !TextUtils.isEmpty(Cadastro_Info.getMatrícula()) && !TextUtils.isEmpty(Cadastro_Info.getTelefone()) && !TextUtils.isEmpty(Senha) && !TextUtils.isEmpty(ConfirmarSenha)){
+                if (!TextUtils.isEmpty(Cadastro_Info.getEmail())
+                        && !TextUtils.isEmpty(Cadastro_Info.getUsuario())
+                        && !TextUtils.isEmpty(Cadastro_Info.getMatrícula())
+                        && !TextUtils.isEmpty(Cadastro_Info.getTelefone())
+                        && !TextUtils.isEmpty(Senha) && !TextUtils.isEmpty(ConfirmarSenha)){
+
+
                     if (Senha.equals(ConfirmarSenha)) {
                         tProgressBar.setVisibility(View.VISIBLE);
-                        mAuth.createUserWithEmailAndPassword(Cadastro_Info.getEmail(), Senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        mAuth.createUserWithEmailAndPassword(Cadastro_Info.getEmail(), Senha)
+                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
@@ -147,14 +168,66 @@ public class cadastroteste extends AppCompatActivity {
                     alert("Informações faltando");
                 }
             }
-        });
+        });*/
 
     }
 
+    private void CadastrarUsuario() {
 
-    private void
-    alert(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+        String Email = EdtEmail_Cadastro.getText().toString();
+        String Senha = EdtSenha_Cadastro.getText().toString();
+        String CSenha = EdtConfirmarSenha_Cadastro.getText().toString();
+        String Almo = Almoxarife.getText().toString();
+        String Soli = Solicitante.getText().toString();
+
+
+        if (Senha.equals(CSenha)){
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(Email,Senha)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            tProgressBar.setVisibility(View.VISIBLE);
+                            if (task.isSuccessful()){
+                                alert(mensagens[1]);
+                                tProgressBar.setVisibility(View.INVISIBLE);
+                            }else{
+                                alert(mensagens[3]);
+                                tProgressBar.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    });
+        }else{
+            alert(mensagens[2]);
+        }
 
     }
+
+        ////Registrando Id das variáveis
+
+
+    private void IniciarComponentes(){
+
+
+        Reference = Database.getInstance().getReference().child("User");
+
+        BtnCadastrar = findViewById(R.id.BtnCadastrar);
+        BtnVoltar_Cadastro = findViewById(R.id.BtnVoltar_Cadastro);
+        EdtUsuario_Cadastro = findViewById(R.id.EdtUsuario_Cadastro);
+        EdtEmail_Cadastro = findViewById(R.id.EdtEmail_Cadastro);
+        EdtMatricula_Cadastro = findViewById(R.id.EdtMatricula_Cadastro);
+        EdtTelefone_Cadastro = findViewById(R.id.EdtTelefone_Cadastro);
+        EdtSenha_Cadastro = findViewById(R.id.EdtSenha_Cadastro);
+        EdtConfirmarSenha_Cadastro = findViewById(R.id.EdtConfirmarSenha_Cadastro);
+        CbMostrarSenha_Cadastro = findViewById(R.id.CbMostrarSenha_Cadastro);
+        tProgressBar = findViewById(R.id.tProgressBar);
+        Rgrp = findViewById(R.id.RGrp);
+        Almoxarife = findViewById(R.id.RBtnAlmoxarife);
+        Solicitante = findViewById(R.id.RBtnSolicitante);
+    }
+
+    private void alert(String s){
+        Toast.makeText(this,s,Toast.LENGTH_LONG).show();
+    }
+
+
 }
