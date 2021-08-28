@@ -37,7 +37,7 @@ public class Estoque extends AppCompatActivity {
 
 
         reference = FirebaseDatabase.getInstance().getReference("Produtos");
-        produtos_list = findViewById(R.id.produtos_list);
+        produtos_list = findViewById(R.id.solicitação_list);
         produtos_list.setHasFixedSize(true);
         produtos_list.setLayoutManager(new LinearLayoutManager(this));
 

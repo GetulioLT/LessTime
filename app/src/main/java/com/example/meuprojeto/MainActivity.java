@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 if ((Email.equals("admin@admin.com") && Senha.equals("123456"))) {
                                     alert("Login Realizado com Sucesso");
-                                    Intent it = new Intent(MainActivity.this, Estoque.class);
+                                    Intent it = new Intent(MainActivity.this, Solicitacao.class);
                                     startActivity(it);
                                     finish();
                                 }else {

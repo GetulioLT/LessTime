@@ -8,32 +8,32 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Solicitacao extends AppCompatActivity {
 
-    Button BtnVoltar_Solicitação;
-    Button BtnAddP_Solicitação;
-    Button BtnEnviar_Solicitação;
-    Button BtnCancelar_Solicitação;
+    Button BtnVoltar_Solicitação, BtnAddP_Solicitação, BtnEnviar_Solicitação,
+            BtnCancelar_Solicitação;
     Spinner Spinner_Produtos;
     EditText EdtQuantP_Solicitação;
-    TextView TvCódigoP_Solicitação;
-    TextView TvNomeP_Solicitação;
-    TextView TvQuantE_Solicitação1;
-    TextView TvQuantE_Solicitação2;
-    TextView TvQuantE_Solicitação3;
-    TextView TvNomeE_Solicitação1;
-    TextView TvNomeE_Solicitação2;
-    TextView TvNomeE_Solicitação3;
-    TextView TvCódigoE_Solicitação1;
-    TextView TvCódigoE_Solicitação2;
-    TextView TvCódigoE_Solicitação3;
+    TextView TvCódigoP_Solicitação, TvNomeP_Solicitação;
     DatabaseReference reference;
-    FirebaseDatabase database;
+    FirebaseDatabase FirebaseDatabase;
+    RecyclerView solicitação_list;
+    Myadapter Myadapter;
+    ArrayList<Produtos_Info> list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +48,36 @@ public class Solicitacao extends AppCompatActivity {
         EdtQuantP_Solicitação = findViewById(R.id.EdtQuantP_Solicitação);
         TvCódigoP_Solicitação = findViewById(R.id.TvCódigoP_Solicitação);
         TvNomeP_Solicitação = findViewById(R.id.TvNomeP_Solicitação);
-        TvQuantE_Solicitação1 = findViewById(R.id.TvQuantE_Solicitação1);
-        TvQuantE_Solicitação2 = findViewById(R.id.TvQuantE_Solicitação2);
-        TvQuantE_Solicitação3 = findViewById(R.id.TvQuantE_Solicitação3);
-        TvNomeE_Solicitação1 = findViewById(R.id.TvNomeE_Solicitação1);
-        TvNomeE_Solicitação2 = findViewById(R.id.TvNomeE_Solicitação2);
-        TvNomeE_Solicitação3 = findViewById(R.id.TvNomeE_Solicitação3);
-        TvCódigoE_Solicitação1 = findViewById(R.id.TvCódigoE_Solicitação1);
-        TvCódigoE_Solicitação2 = findViewById(R.id.TvCódigoE_Solicitação2);
-        TvCódigoE_Solicitação3 = findViewById(R.id.TvCódigoE_Solicitação3);
+        solicitação_list = findViewById(R.id.solicitação_list);
+
+        reference = FirebaseDatabase.getInstance().getReference("Produtos");
+        solicitação_list.setHasFixedSize(true);
+        solicitação_list.setLayoutManager(new LinearLayoutManager(this));
+
+        list = new ArrayList<Produtos_Info>();
+        Myadapter = new Myadapter(this,list);
+        solicitação_list.setAdapter(Myadapter);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                    Produtos_Info user = dataSnapshot.getValue(Produtos_Info.class);
+                    list.add(user);
+
+
+                }
+                Myadapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         BtnVoltar_Solicitação.setOnClickListener(new View.OnClickListener() {
             @Override
