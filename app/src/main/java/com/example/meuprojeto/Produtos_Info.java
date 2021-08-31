@@ -5,11 +5,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Produtos_Info {
 
-        String Produto;
-        String Quantidade;
-        String Código;
-        String Local;
-        String Descrição;
+        String Produto, Quantidade, Código, Local, Descrição;
 
         public Produtos_Info() {
         }

@@ -44,5 +44,10 @@
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/produtos_list"
+            android:layout_width="match_parent"
+            android:layout_height="658dp" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

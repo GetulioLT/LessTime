@@ -17,14 +17,8 @@ import com.google.firebase.storage.FirebaseStorage;
 
 public class Cadastro_Produtos extends AppCompatActivity {
 
-    Button BtnVoltar_CadastroP;
-    Button BtnCadastrar;
-    Button BtnCancelar;
-    EditText EdtCadastro_Produto;
-    EditText EdtCadastro_Quant;
-    EditText EdtCadastro_Codigo;
-    EditText edtCadastro_Local;
-    EditText EdtCadastro_Descrição;
+    Button BtnVoltar_CadastroP, BtnCadastrar, BtnCancelar;
+    EditText EdtCadastro_Produto, EdtCadastro_Quant, EdtCadastro_Codigo, edtCadastro_Local, EdtCadastro_Descrição;
     ProgressBar ProgressBarP;
     Produtos_Info Produtos_Info;
 
