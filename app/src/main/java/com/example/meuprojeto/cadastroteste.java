@@ -111,8 +111,6 @@ public class cadastroteste extends AppCompatActivity {
                 String Telefone = EdtTelefone_Cadastro.getText().toString();
                 String Senha = EdtSenha_Cadastro.getText().toString();
                 String CSenha = EdtConfirmarSenha_Cadastro.getText().toString();
-                String Almo = Almoxarife.getText().toString();
-                String Soli = Solicitante.getText().toString();
 
 
                if (Nome.isEmpty() || Email.isEmpty() || Matricula.isEmpty() || Telefone.isEmpty()
@@ -238,7 +236,7 @@ public class cadastroteste extends AppCompatActivity {
         String Almo = Almoxarife.getText().toString();
         String Soli = Solicitante.getText().toString();
 
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
+
         FirebaseFirestore bd = FirebaseFirestore.getInstance();
 
         Map<String,Object> usuarios = new HashMap<>();
