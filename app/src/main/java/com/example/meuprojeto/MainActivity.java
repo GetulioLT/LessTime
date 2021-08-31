@@ -26,11 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
 public class MainActivity extends AppCompatActivity {
 
-    private EditText tEmail;
-    private EditText tSenha;
+    private EditText tEmail, tSenha;
     private Button btLogin;
     private FirebaseAuth mAuth;
     private FirebaseDatabase Database;
@@ -69,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 String Email = tEmail.getText().toString();
                 String Senha = tSenha.getText().toString();
 
+
                 if (!TextUtils.isEmpty(Email) && !TextUtils.isEmpty(Senha)) {
                     tProgressBar.setVisibility(view.VISIBLE);
 
@@ -77,9 +76,23 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
 
-                                if ((Email.equals("admin@admin.com") && Senha.equals("123456"))) {
+                                if ((Email.equals("jose@teste.com") && Senha.equals("123456"))) {
                                     alert("Login Realizado com Sucesso");
                                     Intent it = new Intent(MainActivity.this, Solicitacao.class);
+                                    startActivity(it);
+                                    finish();
+                                }
+
+                                if ((Email.equals("joao@teste.com") && Senha.equals("123456"))) {
+                                    alert("Login Realizado com Sucesso");
+                                    Intent it = new Intent(MainActivity.this, Tela_dos_pedidos.class);
+                                    startActivity(it);
+                                    finish();
+                                }
+
+                                if ((Email.equals("admin@admin.com") && Senha.equals("123456"))) {
+                                    alert("Login Realizado com Sucesso");
+                                    Intent it = new Intent(MainActivity.this, cadastroteste.class);
                                     startActivity(it);
                                     finish();
                                 }else {
@@ -96,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                                             startActivity(mi);
                                             finish();*/
 
-                                           if (Dados.getRgrp().equalsIgnoreCase("Almoxarife")) {
+                                           /*if (Dados.getRgrp().equalsIgnoreCase("Almoxarife")) {
                                                 alert("Login Realizado com Sucesso");
                                                 Intent mi = new Intent(MainActivity.this, Tela_dos_pedidos.class);
                                                 startActivity(mi);
@@ -106,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                                                 Intent intent = new Intent(MainActivity.this, Solicitacao.class);
                                                 startActivity(intent);
                                                 finish();
-                                           }
+                                           }*/
                                         }
 
                                         @Override
@@ -143,7 +156,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void
-        alert(String s){
+    private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
-}}
+}
+
+
+}
