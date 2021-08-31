@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Branco">#FFFFFF</color>
+    <color name="erro">#CCF9FF</color>
+    <color name="Padrão">#412FBDAC</color>
+    <color name="Padrão_escuro">#801E756A</color>
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LessTime</string>
+    <string name="Botão_Voltar" translatable="false">Voltar</string>
+    <string name="Produtos" translatable="false">Produto:</string>
+    <string name="Código" translatable="false">Código:</string>
+    <string name="Quantidade" translatable="false">Quant.:</string>
+    <string name="usuario"></string>
+    <string name="senha"></string>
+    <string name="login">logar</string>
+
+
+</resources>
