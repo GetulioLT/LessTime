@@ -2,10 +2,9 @@ package com.example.meuprojeto;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,32 +16,51 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.meuprojeto.Info.Cadastro_Info;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText tEmail, tSenha;
     private Button btLogin;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase Database;
+    private DatabaseReference reference;
     private ProgressBar tProgressBar;
     private CheckBox tlMostrar_Senha;
-    FirebaseFirestore bd = FirebaseFirestore.getInstance();
-    String usuarioID;
-    String Rgrp;
+    private com.example.meuprojeto.Info.Cadastro_Info Cadastro_Info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        IniciarComponentes();
+        //Usuário logado ou não
 
-        ////Botão de Login
+       /* if (mAuth.getCurrentUser() != null) {
+            Log.i("CreateUser", "Usuário logado");
+        }else {
+            Log.i("CreateUser", "Usuário não logado");
+        }*/
+
+        tEmail = findViewById(R.id.tEmail);
+        tSenha = findViewById(R.id.tSenha);
+        btLogin = findViewById(R.id.btLogin);
+        tProgressBar = findViewById(R.id.tProgressBar);
+        tlMostrar_Senha = findViewById(R.id.tlMostrar_Senha);
+        mAuth = FirebaseAuth.getInstance();
+
+        Cadastro_Info Usuário = new Cadastro_Info();
+
+        reference = FirebaseDatabase.getInstance().getReference();
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,26 +68,81 @@ public class MainActivity extends AppCompatActivity {
                 String Email = tEmail.getText().toString();
                 String Senha = tSenha.getText().toString();
 
-                if (Email.isEmpty() || Senha.isEmpty()){
-                    alert("Preencha todos os Campos");
-                }else {
-                    tProgressBar.setVisibility(View.VISIBLE);
 
-                    ////Usuario padrão para cadastro
+                if (!TextUtils.isEmpty(Email) && !TextUtils.isEmpty(Senha)) {
+                    tProgressBar.setVisibility(view.VISIBLE);
 
-                    if ((Email.equals("admin@admin.com") && Senha.equals("123456"))) {
-                        alert("Login Realizado com Sucesso");
-                        Intent it = new Intent(MainActivity.this, Tela_dos_pedidos.class);
-                        startActivity(it);
-                        finish();
-                    }else{
-                        AutenticarUsuario();
-                    }
+                    mAuth.signInWithEmailAndPassword(Email, Senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+
+                                if ((Email.equals("jose@teste.com") && Senha.equals("123456"))) {
+                                    alert("Login Realizado com Sucesso");
+                                    Intent it = new Intent(MainActivity.this, Solicitacao.class);
+                                    startActivity(it);
+                                    finish();
+                                }
+
+                                if ((Email.equals("joao@teste.com") && Senha.equals("123456"))) {
+                                    alert("Login Realizado com Sucesso");
+                                    Intent it = new Intent(MainActivity.this, Tela_dos_pedidos.class);
+                                    startActivity(it);
+                                    finish();
+                                }
+
+                                if ((Email.equals("admin@admin.com") && Senha.equals("123456"))) {
+                                    alert("Login Realizado com Sucesso");
+                                    Intent it = new Intent(MainActivity.this, cadastroteste.class);
+                                    startActivity(it);
+                                    finish();
+                                }else {
+                                    reference.child("Usuários").addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            Cadastro_Info Dados = snapshot.getValue(Cadastro_Info.class);
+                                            //snapshot.getValue().toString();
+
+                                            //Gambiarra pra mandar pra tela
+
+                                         /*   alert("Login Realizado com Sucesso");
+                                            Intent mi = new Intent(MainActivity.this, Tela_dos_pedidos.class);
+                                            startActivity(mi);
+                                            finish();*/
+
+                                           /*if (Dados.getRgrp().equalsIgnoreCase("Almoxarife")) {
+                                                alert("Login Realizado com Sucesso");
+                                                Intent mi = new Intent(MainActivity.this, Tela_dos_pedidos.class);
+                                                startActivity(mi);
+                                                finish();
+                                           } else {
+                                                alert("Login Realizado com Sucesso");
+                                                Intent intent = new Intent(MainActivity.this, Solicitacao.class);
+                                                startActivity(intent);
+                                                finish();
+                                           }*/
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            alert("Algo deu errado, tente novamente");
+                                            tProgressBar.setVisibility(view.INVISIBLE);
+                                        }
+                                    });
+                                }
+                            } else {
+                                alert("Login ou senha incorreto");
+                                tProgressBar.setVisibility(view.INVISIBLE);
+                            }
+                        }
+                    });
+                }
+                else {
+                    alert("Login ou senha incorreto");
+                    tProgressBar.setVisibility(view.INVISIBLE);
                 }
             }
         });
-
-        ////checkbox de mostrar senha
 
         tlMostrar_Senha.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -84,73 +157,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    ////Metodo de Login de usuario
-
-    private void AutenticarUsuario(){
-        String Email = tEmail.getText().toString();
-        String Senha = tSenha.getText().toString();
-
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(Email,Senha)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    tProgressBar.setVisibility(View.VISIBLE);
-
-                    ////Captura do Rgrp do usuario após autenticação do email
-
-                    usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    DocumentReference documentReference = bd.collection("Usuarios")
-                            .document(usuarioID);
-                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()){
-                                DocumentSnapshot documentSnapshot = task.getResult();
-                                if (documentSnapshot.exists()){
-                                    Rgrp = (String) documentSnapshot.getData().get("Rgrp");
-                                    Log.d("dyww Rgrp", Rgrp);
-                                }
-                            }
-                        }
-                    });
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (Rgrp.equals("Almoxarife")){
-                                Intent intent = new Intent(MainActivity.this, Tela_dos_pedidos.class);
-                                startActivity(intent);
-                                finish();
-                            }else {
-                                Intent intent = new Intent(MainActivity.this, Solicitacao.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }
-                    },3000);
-                }else{
-                    alert("Informações Incorretas");
-                }
-            }
-        });
-
-    }
-
-    ////Metodo para iniciar todos os Componentes
-
-    private void IniciarComponentes(){
-        tEmail = findViewById(R.id.tEmail);
-        tSenha = findViewById(R.id.tSenha);
-        btLogin = findViewById(R.id.btLogin);
-        tProgressBar = findViewById(R.id.tProgressBar);
-        tlMostrar_Senha = findViewById(R.id.tlMostrar_Senha);
-
-    }
-
-    ////Gerador do alerta
-
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
-    }
+}
+
+
 }

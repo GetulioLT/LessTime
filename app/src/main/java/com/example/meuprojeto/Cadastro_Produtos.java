@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.meuprojeto.Info.Produtos_Info;
+import com.example.meuprojeto.Info.SpinnerP_Info;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -21,8 +23,8 @@ public class Cadastro_Produtos extends AppCompatActivity {
     EditText EdtCadastro_Produto, EdtCadastro_Quant, EdtCadastro_Codigo,
             edtCadastro_Local, EdtCadastro_Descrição;
     ProgressBar ProgressBarP;
-    Produtos_Info Produtos_Info;
-
+    com.example.meuprojeto.Info.Produtos_Info Produtos_Info;
+    SpinnerP_Info SpinnerP_Info;
     FirebaseStorage Storage;
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -43,6 +45,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
         ProgressBarP = findViewById(R.id.ProgressBarP);
 
         Produtos_Info = new Produtos_Info();
+        SpinnerP_Info = new SpinnerP_Info();
 
         BtnVoltar_CadastroP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +65,8 @@ public class Cadastro_Produtos extends AppCompatActivity {
                 Produtos_Info.setLocal(edtCadastro_Local.getText().toString());
                 Produtos_Info.setDescrição(EdtCadastro_Descrição.getText().toString());
 
+                SpinnerP_Info.setProduto(EdtCadastro_Produto.getText().toString());
+
                 ProgressBarP.setVisibility(View.VISIBLE);
 
                 if (!TextUtils.isEmpty(Produtos_Info.getProduto())
@@ -70,6 +75,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
                         && !TextUtils.isEmpty(Produtos_Info.getQuantidade())) {
                     ProgressBarP.setVisibility(View.INVISIBLE);
                     Produtos_Info.salvar();
+                    SpinnerP_Info.Salvar();
                     alert("Produto Registrado com sucesso");
 
                 }else {

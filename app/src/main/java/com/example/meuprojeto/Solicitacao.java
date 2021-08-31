@@ -2,7 +2,10 @@ package com.example.meuprojeto;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -13,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.meuprojeto.Info.Produtos_Info;
+import com.example.meuprojeto.Info.SpinnerP_Info;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Solicitacao extends AppCompatActivity {
 
@@ -27,13 +33,13 @@ public class Solicitacao extends AppCompatActivity {
             BtnCancelar_Solicitação;
     Spinner Spinner_Produtos;
     EditText EdtQuantP_Solicitação;
-    TextView TvCódigoP_Solicitação, TvNomeP_Solicitação;
+    TextView TvCódigoP_Solicitação, TvNomeP_Solicitação, Produto_Spinner;
     DatabaseReference reference;
     FirebaseDatabase FirebaseDatabase;
     RecyclerView solicitação_list;
     Myadapter Myadapter;
     ArrayList<Produtos_Info> list;
-
+    SpinnerP_Info SpinnerP_Info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +56,17 @@ public class Solicitacao extends AppCompatActivity {
         TvNomeP_Solicitação = findViewById(R.id.TvNomeP_Solicitação);
         solicitação_list = findViewById(R.id.solicitação_list);
 
+
         reference = FirebaseDatabase.getInstance().getReference("Produtos");
         solicitação_list.setHasFixedSize(true);
         solicitação_list.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<Produtos_Info>();
         Myadapter = new Myadapter(this,list);
+        SpinnerP_Info = new SpinnerP_Info();
         solicitação_list.setAdapter(Myadapter);
+
+        Carregar_Produtos();
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -79,6 +89,8 @@ public class Solicitacao extends AppCompatActivity {
             }
         });
 
+
+
         BtnVoltar_Solicitação.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,5 +102,27 @@ public class Solicitacao extends AppCompatActivity {
 
     }
 
+    public void Carregar_Produtos (){
+        final List<SpinnerP_Info> SpinnerP = new ArrayList<>();
+        reference.child("Produtos").child("SpinnerP").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
 
+                        String Produto = dataSnapshot.child("Produto").getValue().toString();
+                        SpinnerP.add(new SpinnerP_Info(Produto));
+                    }
+
+                    ArrayAdapter<SpinnerP_Info> arrayAdapter = new ArrayAdapter<>(Solicitacao.this, android.R.layout.simple_dropdown_item_1line, SpinnerP);
+                    Spinner_Produtos.setAdapter(arrayAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }

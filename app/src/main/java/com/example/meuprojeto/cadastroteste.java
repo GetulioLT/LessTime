@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,21 +18,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class cadastroteste extends AppCompatActivity {
 
@@ -48,13 +37,12 @@ public class cadastroteste extends AppCompatActivity {
 
     String[] mensagens = {"Preencha Todos os Campos","Cadastro Realizado com Sucesso",
             "Senhas não coincidem","Usuario já Cadastrado"};
-    String usuarioID;
 
     private ProgressBar tProgressBar;
     private FirebaseAuth mAuth;
     private FirebaseDatabase Database;
     private DatabaseReference Reference;
-    private Cadastro_Info Cadastro_Info;
+    private com.example.meuprojeto.Info.Cadastro_Info Cadastro_Info;
     private RadioButton Almoxarife, Solicitante;
     private RadioGroup Rgrp;
     private String Função;
@@ -112,7 +100,6 @@ public class cadastroteste extends AppCompatActivity {
                 String Senha = EdtSenha_Cadastro.getText().toString();
                 String CSenha = EdtConfirmarSenha_Cadastro.getText().toString();
 
-
                if (Nome.isEmpty() || Email.isEmpty() || Matricula.isEmpty() || Telefone.isEmpty()
                        || Senha.isEmpty() || CSenha.isEmpty()) {
 
@@ -120,7 +107,7 @@ public class cadastroteste extends AppCompatActivity {
 
                }else {
                    CadastrarUsuario();
-
+                   tProgressBar.setVisibility(View.INVISIBLE);
                }
 
             }
@@ -187,7 +174,8 @@ public class cadastroteste extends AppCompatActivity {
         String Email = EdtEmail_Cadastro.getText().toString();
         String Senha = EdtSenha_Cadastro.getText().toString();
         String CSenha = EdtConfirmarSenha_Cadastro.getText().toString();
-
+        String Almo = Almoxarife.getText().toString();
+        String Soli = Solicitante.getText().toString();
 
 
         if (Senha.equals(CSenha)){
@@ -199,25 +187,8 @@ public class cadastroteste extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 alert(mensagens[1]);
                                 tProgressBar.setVisibility(View.INVISIBLE);
-
-                                SalvarDadosUsuario();
-
                             }else{
-
-                                String erro;
-                                try {
-                                    throw task.getException();
-                                }catch (FirebaseAuthWeakPasswordException e) {
-                                    erro = "Digite uma senha com no minimo 6 caracteres";
-                                }catch (FirebaseAuthUserCollisionException e) {
-                                    erro = "Email já cadastrado";
-                                }catch (FirebaseAuthInvalidCredentialsException e){
-                                    erro = "Email invalido";
-                                }catch (Exception e){
-                                    erro = "erro ao cadastrar usuario";
-                                }
-                                erro(erro);
-
+                                alert(mensagens[3]);
                                 tProgressBar.setVisibility(View.INVISIBLE);
                             }
                         }
@@ -228,48 +199,8 @@ public class cadastroteste extends AppCompatActivity {
 
     }
 
-    private void SalvarDadosUsuario(){
-        String Nome = EdtUsuario_Cadastro.getText().toString();
-        String Email = EdtEmail_Cadastro.getText().toString();
-        String Matricula = EdtMatricula_Cadastro.getText().toString();
-        String Telefone = EdtTelefone_Cadastro.getText().toString();
-        String Almo = Almoxarife.getText().toString();
-        String Soli = Solicitante.getText().toString();
-
-
-        FirebaseFirestore bd = FirebaseFirestore.getInstance();
-
-        Map<String,Object> usuarios = new HashMap<>();
-
-        usuarios.put("Nome",Nome);
-        usuarios.put("Email",Email);
-        usuarios.put("Matricula",Matricula);
-        usuarios.put("Telefone",Telefone);
-
-        if (Almoxarife.isChecked()){
-            usuarios.put("Rgrp",Almo);
-        }else {
-            usuarios.put("Rgrp",Soli);
-        }
-
-        usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        DocumentReference documentReference = bd.collection("Usuarios")
-                .document(usuarioID);
-        documentReference.set(usuarios).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d("bd","sucesso ao salvar");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("bd_erro","erro ao salvar"+e.toString());
-            }
-        });
-    }
-
         ////Registrando Id das variáveis
+
 
     private void IniciarComponentes(){
 
@@ -295,7 +226,5 @@ public class cadastroteste extends AppCompatActivity {
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
 
-    private void erro(String erro){
-        Toast.makeText(this,erro,Toast.LENGTH_LONG).show();
-    }
+
 }
