@@ -1,1 +1,1 @@
-Versionamento do app Lesstime
+Versões do aplicativo da empresa LessTime
