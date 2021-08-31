@@ -15,7 +15,9 @@ public class Cadastro_Info {
     public Cadastro_Info() {
     }
 
-    public Cadastro_Info(String id, String usuario, String email, String matrícula, String telefone, String almoxarife, String solicitante, String rgrp) {
+    public Cadastro_Info(String id, String usuario,
+                         String email, String matrícula,
+                         String telefone, String almoxarife, String solicitante, String rgrp) {
         Id = id;
         this.usuario = usuario;
         Email = email;
