@@ -18,7 +18,8 @@ import com.google.firebase.storage.FirebaseStorage;
 public class Cadastro_Produtos extends AppCompatActivity {
 
     Button BtnVoltar_CadastroP, BtnCadastrar, BtnCancelar;
-    EditText EdtCadastro_Produto, EdtCadastro_Quant, EdtCadastro_Codigo, edtCadastro_Local, EdtCadastro_Descrição;
+    EditText EdtCadastro_Produto, EdtCadastro_Quant, EdtCadastro_Codigo,
+            edtCadastro_Local, EdtCadastro_Descrição;
     ProgressBar ProgressBarP;
     Produtos_Info Produtos_Info;
 
@@ -63,7 +64,10 @@ public class Cadastro_Produtos extends AppCompatActivity {
 
                 ProgressBarP.setVisibility(View.VISIBLE);
 
-                if (!TextUtils.isEmpty(Produtos_Info.getProduto()) && !TextUtils.isEmpty(Produtos_Info.getCódigo()) && !TextUtils.isEmpty(Produtos_Info.getLocal()) && !TextUtils.isEmpty(Produtos_Info.getQuantidade())) {
+                if (!TextUtils.isEmpty(Produtos_Info.getProduto())
+                        && !TextUtils.isEmpty(Produtos_Info.getCódigo())
+                        && !TextUtils.isEmpty(Produtos_Info.getLocal())
+                        && !TextUtils.isEmpty(Produtos_Info.getQuantidade())) {
                     ProgressBarP.setVisibility(View.INVISIBLE);
                     Produtos_Info.salvar();
                     alert("Produto Registrado com sucesso");
@@ -72,6 +76,11 @@ public class Cadastro_Produtos extends AppCompatActivity {
                     ProgressBarP.setVisibility(View.INVISIBLE);
                     alert("Informações faltando");
                 }
+                EdtCadastro_Produto.getText().clear();
+                EdtCadastro_Quant.getText().clear();
+                EdtCadastro_Codigo.getText().clear();
+                edtCadastro_Local.getText().clear();
+                EdtCadastro_Descrição.getText().clear();
             }
         });
         BtnCancelar.setOnClickListener(new View.OnClickListener() {
