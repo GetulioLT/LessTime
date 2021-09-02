@@ -14,8 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Cadastro_Produtos extends AppCompatActivity {
 
+<<<<<<< HEAD
     ////Declarando Variáveis
 
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
     Button BtnVoltar_CadastroP, BtnCadastrar, BtnCancelar;
     EditText EdtCadastro_Produto, EdtCadastro_Quant, EdtCadastro_Codigo,
             edtCadastro_Local, EdtCadastro_Descrição;
@@ -64,7 +67,15 @@ public class Cadastro_Produtos extends AppCompatActivity {
                     ProgressBarP.setVisibility(View.INVISIBLE);
                     alert("Informações faltando");
                 }
+<<<<<<< HEAD
                 LimparCampos();
+=======
+                EdtCadastro_Produto.getText().clear();
+                EdtCadastro_Quant.getText().clear();
+                EdtCadastro_Codigo.getText().clear();
+                edtCadastro_Local.getText().clear();
+                EdtCadastro_Descrição.getText().clear();
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
             }
         });
 

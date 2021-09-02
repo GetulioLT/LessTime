@@ -13,6 +13,10 @@ import java.util.ArrayList;
 
 public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
     Context context;
 
     ArrayList<Produtos_Info> list;
