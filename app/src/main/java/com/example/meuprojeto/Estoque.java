@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class Estoque extends AppCompatActivity {
 
     Button btnVoltar_Estoque;
-
     RecyclerView produtos_list;
 
     FirebaseDatabase FirebaseDatabase;
@@ -29,12 +28,10 @@ public class Estoque extends AppCompatActivity {
     Myadapter Myadapter;
     ArrayList<Produtos_Info> list;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estoque);
-
 
         reference = FirebaseDatabase.getInstance().getReference("Produtos");
         produtos_list = findViewById(R.id.solicitação_list);
@@ -53,16 +50,12 @@ public class Estoque extends AppCompatActivity {
 
                     Produtos_Info user = dataSnapshot.getValue(Produtos_Info.class);
                     list.add(user);
-
-
                 }
                 Myadapter.notifyDataSetChanged();
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
@@ -75,8 +68,5 @@ public class Estoque extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
     }
 }

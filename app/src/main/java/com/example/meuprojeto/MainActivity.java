@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if ((Email.equals("admin@admin.com") && Senha.equals("123456"))) {
                         alert("Login Realizado com Sucesso");
-                        Intent it = new Intent(MainActivity.this, Tela_dos_pedidos.class);
+                        Intent it = new Intent(MainActivity.this, cadastroteste.class);
                         startActivity(it);
                         finish();
                     }else{
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                                 finish();
                             }
                         }
-                    },3000);
+                    },2000);
                 }else{
                     alert("Informações Incorretas");
                 }

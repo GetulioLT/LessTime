@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
 
-
     Context context;
 
     ArrayList<Produtos_Info> list;

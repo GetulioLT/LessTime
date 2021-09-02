@@ -12,11 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Tela_dos_pedidos extends AppCompatActivity {
 
-    Button BtnVoltar_Pedidos;
-    Button BtnEstoque_Pedidos;
-    Button BtnEntrada_Pedidos;
-    Button BtnSaída_Pedidos;
-    Button BtnCadastrar_Pedidos;
+    Button BtnVoltar_Pedidos, BtnEstoque_Pedidos, BtnEntrada_Pedidos, BtnSaída_Pedidos, BtnCadastrar_Pedidos;
 
     FirebaseDatabase Database ;
     DatabaseReference reference;
@@ -26,11 +22,7 @@ public class Tela_dos_pedidos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos);
 
-        BtnVoltar_Pedidos = findViewById(R.id.BtnVoltar_Pedidos);
-        BtnEstoque_Pedidos = findViewById(R.id.BtnEstoque_Pedidos);
-        BtnEntrada_Pedidos = findViewById(R.id.BtnEntrada_Pedidos);
-        BtnSaída_Pedidos = findViewById(R.id.BtnSaída_Pedidos);
-        BtnCadastrar_Pedidos = findViewById(R.id.BtnCadastrar_Pedidos);
+        IniciarComponentes();
 
         BtnVoltar_Pedidos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,5 +69,13 @@ public class Tela_dos_pedidos extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void IniciarComponentes() {
+        BtnVoltar_Pedidos = findViewById(R.id.BtnVoltar_Pedidos);
+        BtnEstoque_Pedidos = findViewById(R.id.BtnEstoque_Pedidos);
+        BtnEntrada_Pedidos = findViewById(R.id.BtnEntrada_Pedidos);
+        BtnSaída_Pedidos = findViewById(R.id.BtnSaída_Pedidos);
+        BtnCadastrar_Pedidos = findViewById(R.id.BtnCadastrar_Pedidos);
     }
 }

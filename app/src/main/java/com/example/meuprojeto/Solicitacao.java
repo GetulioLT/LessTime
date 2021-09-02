@@ -34,21 +34,12 @@ public class Solicitacao extends AppCompatActivity {
     Myadapter Myadapter;
     ArrayList<Produtos_Info> list;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitacao);
 
-        BtnVoltar_Solicitação = findViewById(R.id.Btn_Voltar_Solicitação);
-        BtnAddP_Solicitação = findViewById(R.id.BtnAddP_Solicitação);
-        BtnEnviar_Solicitação = findViewById(R.id.BtnEnviar_Solicitação);
-        BtnCancelar_Solicitação = findViewById(R.id.BtnCancelar_Solicitação);
-        Spinner_Produtos = findViewById(R.id.Spinner);
-        EdtQuantP_Solicitação = findViewById(R.id.EdtQuantP_Solicitação);
-        TvCódigoP_Solicitação = findViewById(R.id.TvCódigoP_Solicitação);
-        TvNomeP_Solicitação = findViewById(R.id.TvNomeP_Solicitação);
-        solicitação_list = findViewById(R.id.solicitação_list);
+        IniciarComponentes();
 
         reference = FirebaseDatabase.getInstance().getReference("Produtos");
         solicitação_list.setHasFixedSize(true);
@@ -61,16 +52,11 @@ public class Solicitacao extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-
                     Produtos_Info user = dataSnapshot.getValue(Produtos_Info.class);
                     list.add(user);
-
-
                 }
                 Myadapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -87,7 +73,18 @@ public class Solicitacao extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    private void IniciarComponentes() {
+        BtnVoltar_Solicitação = findViewById(R.id.Btn_Voltar_Solicitação);
+        BtnAddP_Solicitação = findViewById(R.id.BtnAddP_Solicitação);
+        BtnEnviar_Solicitação = findViewById(R.id.BtnEnviar_Solicitação);
+        BtnCancelar_Solicitação = findViewById(R.id.BtnCancelar_Solicitação);
+        Spinner_Produtos = findViewById(R.id.Spinner);
+        EdtQuantP_Solicitação = findViewById(R.id.EdtQuantP_Solicitação);
+        TvCódigoP_Solicitação = findViewById(R.id.TvCódigoP_Solicitação);
+        TvNomeP_Solicitação = findViewById(R.id.TvNomeP_Solicitação);
+        solicitação_list = findViewById(R.id.solicitação_list);
     }
 
 
