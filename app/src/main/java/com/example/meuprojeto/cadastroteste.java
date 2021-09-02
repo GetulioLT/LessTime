@@ -3,7 +3,10 @@ package com.example.meuprojeto;
 import android.content.Intent;
 import android.os.Bundle;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import android.os.Handler;
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 =======
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 import android.text.method.HideReturnsTransformationMethod;
@@ -31,6 +34,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 =======
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -41,7 +49,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.Timer;
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 =======
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 
@@ -50,6 +61,7 @@ public class cadastroteste extends AppCompatActivity {
     ////Declarando Variáveis
 
     private Button BtnVoltar_Cadastro, BtnCadastrar;
+<<<<<<< HEAD
 <<<<<<< HEAD
     private EditText EdtUsuario_Cadastro, EdtEmail_Cadastro, EdtMatricula_Cadastro,
             EdtTelefone_Cadastro, EdtSenha_Cadastro, EdtConfirmarSenha_Cadastro;
@@ -60,6 +72,13 @@ public class cadastroteste extends AppCompatActivity {
             EdtTelefone_Cadastro, EdtSenha_Cadastro, EdtConfirmarSenha_Cadastro;
 
     private CheckBox CbMostrarSenha_Cadastro;
+=======
+
+    private EditText EdtUsuario_Cadastro, EdtEmail_Cadastro, EdtMatricula_Cadastro,
+            EdtTelefone_Cadastro, EdtSenha_Cadastro, EdtConfirmarSenha_Cadastro;
+
+    private CheckBox CbMostrarSenha_Cadastro;
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 
     String[] mensagens = {"Preencha Todos os Campos","Cadastro Realizado com Sucesso",
             "Senhas não coincidem","Usuario já Cadastrado"};
@@ -123,11 +142,40 @@ public class cadastroteste extends AppCompatActivity {
         });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         ////Cadastrar Usuario
 
         BtnCadastrar.setOnClickListener(new View.OnClickListener() {
 =======
         BtnCadastrar.setOnClickListener(new View.OnClickListener() {
+=======
+        BtnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String Nome = EdtUsuario_Cadastro.getText().toString();
+                String Email = EdtEmail_Cadastro.getText().toString();
+                String Matricula = EdtMatricula_Cadastro.getText().toString();
+                String Telefone = EdtTelefone_Cadastro.getText().toString();
+                String Senha = EdtSenha_Cadastro.getText().toString();
+                String CSenha = EdtConfirmarSenha_Cadastro.getText().toString();
+
+
+               if (Nome.isEmpty() || Email.isEmpty() || Matricula.isEmpty() || Telefone.isEmpty()
+                       || Senha.isEmpty() || CSenha.isEmpty()) {
+
+                   alert(mensagens[0]);
+
+               }else {
+                   CadastrarUsuario();
+
+               }
+
+            }
+        });
+
+        /*BtnCadastro.setOnClickListener(new View.OnClickListener() {
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
             @Override
             public void onClick(View v) {
 
@@ -287,6 +335,7 @@ public class cadastroteste extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 Log.d("bd","sucesso ao salvar");
             }
+<<<<<<< HEAD
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -299,6 +348,8 @@ public class cadastroteste extends AppCompatActivity {
 
         ////Registrando Id das variáveis
 =======
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
         });*/
 
     }
@@ -346,6 +397,7 @@ public class cadastroteste extends AppCompatActivity {
         }else{
             alert(mensagens[2]);
         }
+<<<<<<< HEAD
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 
     private void IniciarComponentes(){
@@ -365,7 +417,75 @@ public class cadastroteste extends AppCompatActivity {
 
 <<<<<<< HEAD
     ////Metodos de Alertas
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 
+=======
+    private void SalvarDadosUsuario(){
+        String Nome = EdtUsuario_Cadastro.getText().toString();
+        String Email = EdtEmail_Cadastro.getText().toString();
+        String Matricula = EdtMatricula_Cadastro.getText().toString();
+        String Telefone = EdtTelefone_Cadastro.getText().toString();
+        String Almo = Almoxarife.getText().toString();
+        String Soli = Solicitante.getText().toString();
+
+
+        FirebaseFirestore bd = FirebaseFirestore.getInstance();
+
+        Map<String,Object> usuarios = new HashMap<>();
+
+        usuarios.put("Nome",Nome);
+        usuarios.put("Email",Email);
+        usuarios.put("Matricula",Matricula);
+        usuarios.put("Telefone",Telefone);
+
+        if (Almoxarife.isChecked()){
+            usuarios.put("Rgrp",Almo);
+        }else {
+            usuarios.put("Rgrp",Soli);
+        }
+
+        usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DocumentReference documentReference = bd.collection("Usuarios")
+                .document(usuarioID);
+        documentReference.set(usuarios).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d("bd","sucesso ao salvar");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("bd_erro","erro ao salvar"+e.toString());
+            }
+        });
+    }
+
+<<<<<<< HEAD
+        ////Registrando Id das variáveis
+
+    private void IniciarComponentes(){
+
+
+        Reference = Database.getInstance().getReference().child("User");
+
+        BtnCadastrar = findViewById(R.id.BtnCadastrar);
+        BtnVoltar_Cadastro = findViewById(R.id.BtnVoltar_Cadastro);
+        EdtUsuario_Cadastro = findViewById(R.id.EdtUsuario_Cadastro);
+        EdtEmail_Cadastro = findViewById(R.id.EdtEmail_Cadastro);
+        EdtMatricula_Cadastro = findViewById(R.id.EdtMatricula_Cadastro);
+        EdtTelefone_Cadastro = findViewById(R.id.EdtTelefone_Cadastro);
+        EdtSenha_Cadastro = findViewById(R.id.EdtSenha_Cadastro);
+        EdtConfirmarSenha_Cadastro = findViewById(R.id.EdtConfirmarSenha_Cadastro);
+        CbMostrarSenha_Cadastro = findViewById(R.id.CbMostrarSenha_Cadastro);
+        tProgressBar = findViewById(R.id.tProgressBar);
+        Rgrp = findViewById(R.id.RGrp);
+        Almoxarife = findViewById(R.id.RBtnAlmoxarife);
+        Solicitante = findViewById(R.id.RBtnSolicitante);
+    }
+
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 =======
     private void SalvarDadosUsuario(){
         String Nome = EdtUsuario_Cadastro.getText().toString();

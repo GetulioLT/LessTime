@@ -34,6 +34,10 @@ public class Solicitacao extends AppCompatActivity {
     Myadapter Myadapter;
     ArrayList<Produtos_Info> list;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 =======
 
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
@@ -55,6 +59,9 @@ public class Solicitacao extends AppCompatActivity {
         TvCódigoP_Solicitação = findViewById(R.id.TvCódigoP_Solicitação);
         TvNomeP_Solicitação = findViewById(R.id.TvNomeP_Solicitação);
         solicitação_list = findViewById(R.id.solicitação_list);
+<<<<<<< HEAD
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+=======
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 
         reference = FirebaseDatabase.getInstance().getReference("Produtos");
@@ -69,12 +76,15 @@ public class Solicitacao extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Produtos_Info user = dataSnapshot.getValue(Produtos_Info.class);
                     list.add(user);
                 }
                 Myadapter.notifyDataSetChanged();
 =======
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
 
@@ -85,6 +95,9 @@ public class Solicitacao extends AppCompatActivity {
                 }
                 Myadapter.notifyDataSetChanged();
 
+<<<<<<< HEAD
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+=======
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
             }
 

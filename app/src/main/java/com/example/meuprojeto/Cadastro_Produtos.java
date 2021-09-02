@@ -15,8 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Cadastro_Produtos extends AppCompatActivity {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     ////Declarando Variáveis
 
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 =======
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
     Button BtnVoltar_CadastroP, BtnCadastrar, BtnCancelar;
@@ -68,13 +71,19 @@ public class Cadastro_Produtos extends AppCompatActivity {
                     alert("Informações faltando");
                 }
 <<<<<<< HEAD
+<<<<<<< HEAD
                 LimparCampos();
 =======
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
                 EdtCadastro_Produto.getText().clear();
                 EdtCadastro_Quant.getText().clear();
                 EdtCadastro_Codigo.getText().clear();
                 edtCadastro_Local.getText().clear();
                 EdtCadastro_Descrição.getText().clear();
+<<<<<<< HEAD
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+=======
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
             }
         });

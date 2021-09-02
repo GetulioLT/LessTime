@@ -27,13 +27,21 @@ public class Estoque extends AppCompatActivity {
 =======
     RecyclerView produtos_list;
 
+<<<<<<< HEAD
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+=======
+    RecyclerView produtos_list;
+
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
     FirebaseDatabase FirebaseDatabase;
     DatabaseReference reference;
     Myadapter Myadapter;
     ArrayList<Produtos_Info> list;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 
@@ -42,6 +50,7 @@ public class Estoque extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estoque);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         reference = FirebaseDatabase.getInstance().getReference("Produtos");
         produtos_list = findViewById(R.id.solicitação_list);
@@ -82,11 +91,40 @@ public class Estoque extends AppCompatActivity {
                 Myadapter.notifyDataSetChanged();
 
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+=======
+
+        reference = FirebaseDatabase.getInstance().getReference("Produtos");
+        produtos_list = findViewById(R.id.solicitação_list);
+        produtos_list.setHasFixedSize(true);
+        produtos_list.setLayoutManager(new LinearLayoutManager(this));
+
+        list = new ArrayList<Produtos_Info>();
+        Myadapter = new Myadapter(this,list);
+        produtos_list.setAdapter(Myadapter);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                    Produtos_Info user = dataSnapshot.getValue(Produtos_Info.class);
+                    list.add(user);
+
+
+                }
+                Myadapter.notifyDataSetChanged();
+
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
 =======
 
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
@@ -105,6 +143,11 @@ public class Estoque extends AppCompatActivity {
 <<<<<<< HEAD
 =======
 
+
+
+<<<<<<< HEAD
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+=======
 
 
 >>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
