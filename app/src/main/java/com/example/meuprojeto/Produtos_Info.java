@@ -10,7 +10,8 @@ public class Produtos_Info {
         public Produtos_Info() {
         }
 
-        public Produtos_Info(String produto, String quantidade, String código, String local, String descrição) {
+        public Produtos_Info(String produto, String quantidade, String código, String local,
+                             String descrição) {
                 Produto = produto;
                 Quantidade = quantidade;
                 Código = código;

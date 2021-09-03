@@ -18,13 +18,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="371dp"
-        android:layout_height="683dp"
+        android:layout_height="670dp"
         android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:background="@color/Padrão"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,22 +69,22 @@
                 android:backgroundTint="#ffffff"
                 android:hint="Email: "
                 android:inputType="textEmailAddress"
+                android:text="@string/usuario"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:text="@string/usuario"/>
+                android:textColorHint="#FFFFFF" />
 
             <EditText
                 android:id="@+id/tSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
+                android:backgroundTint="#ffffff"
                 android:ems="10"
                 android:hint="Senha: "
                 android:inputType="textPassword"
-                android:backgroundTint="#ffffff"
+                android:text="@string/senha"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:text="@string/senha"/>
+                android:textColorHint="#FFFFFF" />
 
             <CheckBox
                 android:id="@+id/tlMostrar_Senha"
@@ -110,13 +108,16 @@
 
     <ProgressBar
         android:id="@+id/tProgressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/Branco"
+        android:layout_marginTop="4dp"
         android:indeterminate="true"
+        android:indeterminateTint="@color/Branco"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        tools:layout_editor_absoluteX="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

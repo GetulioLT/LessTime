@@ -56,15 +56,6 @@
             android:orientation="horizontal"
             android:paddingBottom="5dp">
 
-            <TextView
-                android:id="@+id/Produto_Spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:textColor="@color/Branco"
-                android:textSize="18sp" />
-
             <Spinner
                 android:id="@+id/Spinner"
                 android:layout_width="wrap_content"

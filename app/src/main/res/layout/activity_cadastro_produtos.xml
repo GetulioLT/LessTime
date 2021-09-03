@@ -52,12 +52,11 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
             tools:layout_editor_absoluteX="1dp">
 
-            <ImageButton
-                android:id="@+id/imageButton"
+            <ImageView
+                android:id="@+id/ImagemPro"
                 android:layout_width="350dp"
                 android:layout_height="200dp"
-                android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_menu_gallery" />
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
