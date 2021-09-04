@@ -5,18 +5,27 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Produtos_Info {
 
-        String Produto, Quantidade, Código, Local, Descrição;
+        String Produto, Quantidade, Código, Local, Descrição, Img_url;
 
         public Produtos_Info() {
         }
 
         public Produtos_Info(String produto, String quantidade, String código, String local,
-                             String descrição) {
+                             String descrição, String img_url) {
                 Produto = produto;
                 Quantidade = quantidade;
                 Código = código;
                 Local = local;
                 Descrição = descrição;
+                Img_url = img_url;
+        }
+
+        public String getImg_url() {
+                return Img_url;
+        }
+
+        public void setImg_url(String img_url) {
+                Img_url = img_url;
         }
 
         public String getProduto() {

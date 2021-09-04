@@ -52,11 +52,44 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
             tools:layout_editor_absoluteX="1dp">
 
-            <ImageView
-                android:id="@+id/ImagemPro"
-                android:layout_width="350dp"
-                android:layout_height="200dp"
-                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="3dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/EdtCadastro_Produto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/Branco"
+                    android:ems="10"
+                    android:hint="Produto"
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/edtCadastro_Local"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/Branco"
+                    android:ems="10"
+                    android:hint="Local"
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/EdtCadastro_Descrição"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/Branco"
+                    android:ems="10"
+                    android:hint="Descrição"
+                    android:inputType="text" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,24 +104,14 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/EdtCadastro_Produto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/Branco"
-                        android:ems="10"
-                        android:inputType="text"
-                        android:hint="Produto" />
-
-                    <EditText
                         android:id="@+id/EdtCadastro_Quant"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:backgroundTint="@color/Branco"
                         android:ems="10"
-                        android:inputType="text|number"
-                        android:hint="Quant." />
+                        android:hint="Quant."
+                        android:inputType="text|number" />
 
                     <EditText
                         android:id="@+id/EdtCadastro_Codigo"
@@ -97,32 +120,20 @@
                         android:layout_weight="1"
                         android:backgroundTint="@color/Branco"
                         android:ems="10"
-                        android:inputType="text"
-                        android:hint="Código" />
+                        android:hint="Código"
+                        android:inputType="text" />
 
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/edtCadastro_Local"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/Branco"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:hint="Local" />
-
-                <EditText
-                    android:id="@+id/EdtCadastro_Descrição"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/Branco"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:hint="Descrição" />
+                <ImageView
+                    android:id="@+id/ImagemPro"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
 
             </LinearLayout>
+
         </LinearLayout>
 
         <Button

@@ -1,7 +1,11 @@
 package com.example.meuprojeto;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +14,18 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+import java.util.UUID;
 
 public class Cadastro_Produtos extends AppCompatActivity {
 
@@ -23,6 +38,9 @@ public class Cadastro_Produtos extends AppCompatActivity {
     ImageView ImagemProduto;
 
     Produtos_Info Produtos_Info;
+    Spinner_Info Spinner_Info;
+
+    private Uri mSelectedUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +50,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
         IniciarComponentes();
 
         Produtos_Info = new Produtos_Info();
+        Spinner_Info = new Spinner_Info();
 
         ////Voltar para tela de pedidos
 
@@ -56,9 +75,12 @@ public class Cadastro_Produtos extends AppCompatActivity {
                 if (!TextUtils.isEmpty(Produtos_Info.getProduto())
                         && !TextUtils.isEmpty(Produtos_Info.getCódigo())
                         && !TextUtils.isEmpty(Produtos_Info.getLocal())
-                        && !TextUtils.isEmpty(Produtos_Info.getQuantidade())) {
+                        && !TextUtils.isEmpty(Produtos_Info.getQuantidade())
+                        && !TextUtils.isEmpty(Produtos_Info.getProduto())){
                     ProgressBarP.setVisibility(View.INVISIBLE);
                     Produtos_Info.salvar();
+                    Spinner_Info.Salvar();
+                    SalvarImage();
                     alert("Produto Registrado com sucesso");
                 }else {
                     ProgressBarP.setVisibility(View.INVISIBLE);
@@ -78,6 +100,57 @@ public class Cadastro_Produtos extends AppCompatActivity {
                 EdtCadastro_Descrição.getText().clear();
             }
         });
+
+        ImagemProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SelecionarImg();
+            }
+        });
+    }
+
+    private void SalvarImage() {
+        String filename = UUID.randomUUID().toString();
+        final StorageReference ref = FirebaseStorage.getInstance()
+                .getReference("/image/" + filename);
+        ref.putFile(mSelectedUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Produtos_Info.setImg_url(uri.toString());
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0){
+            mSelectedUri = data.getData();
+
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedUri);
+                ImagemProduto.setImageDrawable(new BitmapDrawable(bitmap));
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    private void SelecionarImg() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, 0);
     }
 
     private void LimparCampos() {
@@ -94,6 +167,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
         Produtos_Info.setCódigo(EdtCadastro_Codigo.getText().toString());
         Produtos_Info.setLocal(edtCadastro_Local.getText().toString());
         Produtos_Info.setDescrição(EdtCadastro_Descrição.getText().toString());
+        Spinner_Info.setProduto(EdtCadastro_Produto.getText().toString());
     }
 
     private void IniciarComponentes() {
