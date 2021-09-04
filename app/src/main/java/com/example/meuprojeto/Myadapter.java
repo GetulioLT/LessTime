@@ -3,6 +3,7 @@ package com.example.meuprojeto;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.UrlQuerySanitizer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.auth.User;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -21,7 +25,6 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
     Context context;
 
     ArrayList<Produtos_Info> list;
-
 
     public Myadapter(Context context, ArrayList<Produtos_Info> list) {
         this.context = context;
@@ -37,7 +40,6 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
         Produtos_Info user = list.get(position);
         holder.Produto.setText(user.getProduto());
         holder.Quantidade.setText(user.getQuantidade());
@@ -45,8 +47,7 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
         holder.Local.setText(user.getLocal());
         holder.Descrição.setText(user.getDescrição());
 
-
-
+        Picasso.get().load(user.getImagem()).into(holder.Imagem);
     }
 
     @Override
@@ -69,8 +70,6 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
             Local = itemView.findViewById(R.id.list_Local);
             Descrição = itemView.findViewById(R.id.list_Descrição);
             Imagem = itemView.findViewById(R.id.list_imagem);
-
         }
     }
-
 }
