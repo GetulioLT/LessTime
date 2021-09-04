@@ -1,39 +1,41 @@
  package com.example.meuprojeto;
 
+import android.util.Log;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Produtos_Info {
 
-        String Produto, Quantidade, Código, Local, Descrição, Img_url;
+        String Produto, Quantidade, Código, Local, Descrição, Imagem;
 
         public Produtos_Info() {
         }
 
-        public Produtos_Info(String produto, String quantidade, String código, String local,
-                             String descrição, String img_url) {
-                Produto = produto;
+        public Produtos_Info(String quantidade, String código, String local,
+                             String descrição, String imagem, String produto) {
                 Quantidade = quantidade;
+                Imagem = imagem;
+                Produto = produto;
                 Código = código;
                 Local = local;
                 Descrição = descrição;
-                Img_url = img_url;
         }
 
-        public String getImg_url() {
-                return Img_url;
+        public void setImagem(String imagem){
+                Imagem = imagem;
         }
 
-        public void setImg_url(String img_url) {
-                Img_url = img_url;
+        public String getImagem(){
+                return Imagem;
+        }
+
+        public void setProduto(String produto){
+                Produto = produto;
         }
 
         public String getProduto() {
                 return Produto;
-        }
-
-        public void setProduto(String produto) {
-                Produto = produto;
         }
 
         public String getQuantidade() {
@@ -71,5 +73,6 @@ public class Produtos_Info {
         public void salvar() {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
                 reference.child("Produtos").child(getProduto()).setValue(this);
+
         }
 }

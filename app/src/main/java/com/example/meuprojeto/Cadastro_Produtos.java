@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +41,10 @@ public class Cadastro_Produtos extends AppCompatActivity {
     Produtos_Info Produtos_Info;
     Spinner_Info Spinner_Info;
 
+    String Url;
+
     private Uri mSelectedUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,13 @@ public class Cadastro_Produtos extends AppCompatActivity {
             }
         });
 
+        ImagemProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SelecionarImg();
+            }
+        });
+
         ////Cadastro de produtos
 
         BtnCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +91,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
                     ProgressBarP.setVisibility(View.INVISIBLE);
                     Produtos_Info.salvar();
                     Spinner_Info.Salvar();
-                    SalvarImage();
                     alert("Produto Registrado com sucesso");
                 }else {
                     ProgressBarP.setVisibility(View.INVISIBLE);
@@ -100,35 +110,12 @@ public class Cadastro_Produtos extends AppCompatActivity {
                 EdtCadastro_Descrição.getText().clear();
             }
         });
-
-        ImagemProduto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SelecionarImg();
-            }
-        });
     }
 
-    private void SalvarImage() {
-        String filename = UUID.randomUUID().toString();
-        final StorageReference ref = FirebaseStorage.getInstance()
-                .getReference("/image/" + filename);
-        ref.putFile(mSelectedUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Produtos_Info.setImg_url(uri.toString());
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
+    private void SelecionarImg() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, 0);
     }
 
     @Override
@@ -142,15 +129,40 @@ public class Cadastro_Produtos extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedUri);
                 ImagemProduto.setImageDrawable(new BitmapDrawable(bitmap));
+                Log.d("dyww sucesso", String.valueOf(ImagemProduto));
+                SalvarImage();
             } catch (IOException e) {
             }
         }
     }
 
-    private void SelecionarImg() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, 0);
+    private void SalvarImage() {
+        String filename = UUID.randomUUID().toString();
+        final StorageReference ref = FirebaseStorage.getInstance()
+                .getReference("/image/" + filename);
+
+        Log.d("dyww salvo", String.valueOf(ref));
+        ref.putFile(mSelectedUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Url = uri.toString();
+
+
+
+                        Log.d("dyww ulr", uri.toString());
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
     }
 
     private void LimparCampos() {
@@ -167,6 +179,8 @@ public class Cadastro_Produtos extends AppCompatActivity {
         Produtos_Info.setCódigo(EdtCadastro_Codigo.getText().toString());
         Produtos_Info.setLocal(edtCadastro_Local.getText().toString());
         Produtos_Info.setDescrição(EdtCadastro_Descrição.getText().toString());
+        Produtos_Info.setImagem(Url);
+
         Spinner_Info.setProduto(EdtCadastro_Produto.getText().toString());
     }
 

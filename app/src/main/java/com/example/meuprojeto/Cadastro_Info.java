@@ -11,19 +11,30 @@ public class Cadastro_Info {
     private String Matrícula;
     private String Telefone;
     private String Rgrp;
+    private String Img;
 
     public Cadastro_Info() {
     }
 
     public Cadastro_Info(String id, String usuario,
                          String email, String matrícula,
-                         String telefone, String almoxarife, String solicitante, String rgrp) {
+                         String telefone, String almoxarife, String solicitante,
+                         String rgrp, String img) {
         Id = id;
         this.usuario = usuario;
         Email = email;
         Matrícula = matrícula;
         Telefone = telefone;
         Rgrp = rgrp;
+        Img = img;
+    }
+
+    public String getImg(){
+        return Img;
+    }
+
+    public String setImg(String img){
+        return Img = img;
     }
 
     public String getId() {
