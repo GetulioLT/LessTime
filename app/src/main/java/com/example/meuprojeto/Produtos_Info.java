@@ -14,14 +14,8 @@ public class Produtos_Info {
         public Produtos_Info() {
         }
 
-<<<<<<< HEAD
         public Produtos_Info(String quantidade, String código, String local,
                              String descrição, String imagem, String produto) {
-=======
-        public Produtos_Info(String produto, String quantidade, String código, String local,
-                             String descrição) {
-                Produto = produto;
->>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
                 Quantidade = quantidade;
                 Imagem = imagem;
                 Produto = produto;

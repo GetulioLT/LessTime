@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-<<<<<<< HEAD
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,24 +32,11 @@ public class Cadastro_Produtos extends AppCompatActivity {
 
     ////Declarando Variáveis
 
-=======
-public class Cadastro_Produtos extends AppCompatActivity {
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-    ////Declarando Variáveis
-
-=======
->>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
-=======
->>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
->>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
     Button BtnVoltar_CadastroP, BtnCadastrar, BtnCancelar;
     EditText EdtCadastro_Produto, EdtCadastro_Quant, EdtCadastro_Codigo,
             edtCadastro_Local, EdtCadastro_Descrição;
     ProgressBar ProgressBarP;
     ImageView ImagemProduto;
-<<<<<<< HEAD
 
     Produtos_Info Produtos_Info;
     Spinner_Info Spinner_Info;
@@ -59,10 +45,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
 
     private Uri mSelectedUri;
 
-=======
-
-    Produtos_Info Produtos_Info;
->>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +58,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
 
         ////Voltar para tela de pedidos
 
-        ////Voltar para tela de pedidos
-
         BtnVoltar_CadastroP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +67,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
         ImagemProduto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,13 +79,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
         BtnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-=======
-        ////Cadastro de produtos
-
-        BtnCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
->>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
                 CadastroProdutos();
 
                 ProgressBarP.setVisibility(View.VISIBLE);
@@ -124,25 +96,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
                     ProgressBarP.setVisibility(View.INVISIBLE);
                     alert("Informações faltando");
                 }
-<<<<<<< HEAD
                 LimparCampos();
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-                LimparCampos();
-=======
-=======
->>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
-                EdtCadastro_Produto.getText().clear();
-                EdtCadastro_Quant.getText().clear();
-                EdtCadastro_Codigo.getText().clear();
-                edtCadastro_Local.getText().clear();
-                EdtCadastro_Descrição.getText().clear();
-<<<<<<< HEAD
->>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
-=======
->>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
->>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
             }
         });
 
@@ -158,7 +112,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
         });
     }
 
-<<<<<<< HEAD
     private void SelecionarImg() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
@@ -212,8 +165,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
         });
     }
 
-=======
->>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
     private void LimparCampos() {
         EdtCadastro_Produto.getText().clear();
         EdtCadastro_Quant.getText().clear();
@@ -228,12 +179,9 @@ public class Cadastro_Produtos extends AppCompatActivity {
         Produtos_Info.setCódigo(EdtCadastro_Codigo.getText().toString());
         Produtos_Info.setLocal(edtCadastro_Local.getText().toString());
         Produtos_Info.setDescrição(EdtCadastro_Descrição.getText().toString());
-<<<<<<< HEAD
         Produtos_Info.setImagem(Url);
 
         Spinner_Info.setProduto(EdtCadastro_Produto.getText().toString());
-=======
->>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
     }
 
     private void IniciarComponentes() {
@@ -246,11 +194,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
         edtCadastro_Local = findViewById(R.id.edtCadastro_Local);
         EdtCadastro_Descrição = findViewById(R.id.EdtCadastro_Descrição);
         ProgressBarP = findViewById(R.id.ProgressBarP);
-<<<<<<< HEAD
         ImagemProduto = findViewById(R.id.ImagemPro);
-=======
-        ImagemProduto = findViewById(R.id.InagemProduto);
->>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
     }
 
     private void

@@ -59,19 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if ((Email.equals("admin@admin.com") && Senha.equals("123456"))) {
                         alert("Login Realizado com Sucesso");
-<<<<<<< HEAD
                         Intent it = new Intent(MainActivity.this, cadastroteste.class);
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        Intent it = new Intent(MainActivity.this, cadastroteste.class);
-=======
-                        Intent it = new Intent(MainActivity.this, Tela_dos_pedidos.class);
->>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
-=======
-                        Intent it = new Intent(MainActivity.this, Tela_dos_pedidos.class);
->>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
->>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
                         startActivity(it);
                         finish();
                     }else{
@@ -140,19 +128,7 @@ public class MainActivity extends AppCompatActivity {
                                 finish();
                             }
                         }
-<<<<<<< HEAD
                     },2000);
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    },2000);
-=======
-                    },3000);
->>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
-=======
-                    },3000);
->>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
->>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
                 }else{
                     alert("Informações Incorretas");
                 }
