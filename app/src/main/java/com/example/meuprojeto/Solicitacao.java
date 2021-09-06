@@ -33,13 +33,43 @@ public class Solicitacao extends AppCompatActivity {
     RecyclerView solicitação_list;
     Myadapter Myadapter;
     ArrayList<Produtos_Info> list;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
+<<<<<<< HEAD
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+=======
+
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+
+>>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitacao);
 
+<<<<<<< HEAD
         IniciarComponentes();
+=======
+<<<<<<< HEAD
+        IniciarComponentes();
+=======
+        BtnVoltar_Solicitação = findViewById(R.id.Btn_Voltar_Solicitação);
+        BtnAddP_Solicitação = findViewById(R.id.BtnAddP_Solicitação);
+        BtnEnviar_Solicitação = findViewById(R.id.BtnEnviar_Solicitação);
+        BtnCancelar_Solicitação = findViewById(R.id.BtnCancelar_Solicitação);
+        Spinner_Produtos = findViewById(R.id.Spinner);
+        EdtQuantP_Solicitação = findViewById(R.id.EdtQuantP_Solicitação);
+        TvCódigoP_Solicitação = findViewById(R.id.TvCódigoP_Solicitação);
+        TvNomeP_Solicitação = findViewById(R.id.TvNomeP_Solicitação);
+        solicitação_list = findViewById(R.id.solicitação_list);
+<<<<<<< HEAD
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+>>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
 
         reference = FirebaseDatabase.getInstance().getReference("Produtos");
         solicitação_list.setHasFixedSize(true);
@@ -52,11 +82,33 @@ public class Solicitacao extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Produtos_Info user = dataSnapshot.getValue(Produtos_Info.class);
                     list.add(user);
                 }
                 Myadapter.notifyDataSetChanged();
+=======
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+
+>>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Produtos_Info user = dataSnapshot.getValue(Produtos_Info.class);
+                    list.add(user);
+                }
+                Myadapter.notifyDataSetChanged();
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+=======
+>>>>>>> 3db9bc0e28fd5f6bdad7bf624412111a515742d2
+>>>>>>> 0151d84635fb180fbc7f9233f282498b02755bec
             }
 
             @Override
