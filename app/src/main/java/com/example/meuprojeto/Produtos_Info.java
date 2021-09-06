@@ -77,4 +77,9 @@ public class Produtos_Info {
                 reference.child("Produtos").child(getProduto()).setValue(this);
 
         }
+
+        @Override
+        public String toString() {
+                return Produto;
+        }
 }

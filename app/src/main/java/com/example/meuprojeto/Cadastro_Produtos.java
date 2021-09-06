@@ -39,7 +39,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
     ImageView ImagemProduto;
 
     Produtos_Info Produtos_Info;
-    Spinner_Info Spinner_Info;
+
 
     String Url;
 
@@ -54,7 +54,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
         IniciarComponentes();
 
         Produtos_Info = new Produtos_Info();
-        Spinner_Info = new Spinner_Info();
 
         ////Voltar para tela de pedidos
 
@@ -90,7 +89,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
                         && !TextUtils.isEmpty(Produtos_Info.getProduto())){
                     ProgressBarP.setVisibility(View.INVISIBLE);
                     Produtos_Info.salvar();
-                    Spinner_Info.Salvar();
                     alert("Produto Registrado com sucesso");
                 }else {
                     ProgressBarP.setVisibility(View.INVISIBLE);
@@ -180,8 +178,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
         Produtos_Info.setLocal(edtCadastro_Local.getText().toString());
         Produtos_Info.setDescrição(EdtCadastro_Descrição.getText().toString());
         Produtos_Info.setImagem(Url);
-
-        Spinner_Info.setProduto(EdtCadastro_Produto.getText().toString());
     }
 
     private void IniciarComponentes() {

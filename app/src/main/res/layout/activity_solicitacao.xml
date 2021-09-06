@@ -65,7 +65,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="Davi"
                 android:textColor="@color/Branco"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -147,13 +146,11 @@
                 android:layout_marginStart="100dp"
                 android:orientation="vertical">
 
-                <Spinner
-                    android:id="@+id/Spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingLeft="5dp"
-                    android:textColor="@color/Branco"
-                    android:textSize="18sp" />
+                <Button
+                    android:id="@+id/Btn_popup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pesquisar" />
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -185,9 +182,9 @@
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="415dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnAddP_Solicitação"
         tools:layout_editor_absoluteX="16dp">
 
         <LinearLayout
@@ -240,10 +237,9 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/solicitação_list"
+                android:id="@+id/Solicitação_list"
                 android:layout_width="match_parent"
-                android:layout_height="310dp"
-                android:paddingHorizontal="5sp" />
+                android:layout_height="330dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
