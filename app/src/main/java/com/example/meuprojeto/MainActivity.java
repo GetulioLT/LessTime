@@ -25,15 +25,20 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
+    //Declarando Variáveis
     private EditText tEmail, tSenha;
     private Button btLogin;
     private ProgressBar tProgressBar;
     private CheckBox tlMostrar_Senha;
-    FirebaseFirestore bd = FirebaseFirestore.getInstance();
+    final FirebaseFirestore bd = FirebaseFirestore.getInstance();
     String usuarioID;
     String Rgrp;
+    final String[] mensagens = {"Preencha todos os Campos", "Preencha todos os Campos",
+            "Preencha todos os Campos"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         IniciarComponentes();
 
-        ////Botão de Login
-
+        //Botão de Login
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,14 +55,13 @@ public class MainActivity extends AppCompatActivity {
                 String Senha = tSenha.getText().toString();
 
                 if (Email.isEmpty() || Senha.isEmpty()){
-                    alert("Preencha todos os Campos");
+                    alert(mensagens[0]);
                 }else {
                     tProgressBar.setVisibility(View.VISIBLE);
 
-                    ////Usuario padrão para cadastro
-
+                    //Usuario padrão para cadastro
                     if ((Email.equals("admin@admin.com") && Senha.equals("123456"))) {
-                        alert("Login Realizado com Sucesso");
+                        alert(mensagens[1]);
                         Intent it = new Intent(MainActivity.this, cadastroteste.class);
                         startActivity(it);
                         finish();
@@ -69,8 +72,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ////checkbox de mostrar senha
-
+        //Mostrar Senha
         tlMostrar_Senha.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -84,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    ////Metodo de Login de usuario
-
+    //Metódo de Login de usuario
     private void AutenticarUsuario(){
         String Email = tEmail.getText().toString();
         String Senha = tSenha.getText().toString();
@@ -97,59 +98,60 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     tProgressBar.setVisibility(View.VISIBLE);
 
-                    ////Captura do Rgrp do usuario após autenticação do email
-
-                    usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    //Captura do Cargo no Firebase
+                    usuarioID = Objects.requireNonNull(FirebaseAuth.getInstance()
+                            .getCurrentUser()).getUid();
                     DocumentReference documentReference = bd.collection("Usuarios")
                             .document(usuarioID);
-                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    documentReference.get()
+                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()){
                                 DocumentSnapshot documentSnapshot = task.getResult();
-                                if (documentSnapshot.exists()){
-                                    Rgrp = (String) documentSnapshot.getData().get("Rgrp");
+                                if (Objects.requireNonNull(documentSnapshot).exists()){
+                                    Rgrp = (String) Objects.requireNonNull(documentSnapshot
+                                            .getData()).get("Rgrp");
                                     Log.d("dyww Rgrp", Rgrp);
                                 }
                             }
                         }
                     });
 
+                    //Temporização para Login
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             if (Rgrp.equals("Almoxarife")){
-                                Intent intent = new Intent(MainActivity.this, Tela_dos_pedidos.class);
+                                Intent intent = new Intent
+                                        (MainActivity.this, Tela_dos_pedidos.class);
                                 startActivity(intent);
                                 finish();
                             }else {
-                                Intent intent = new Intent(MainActivity.this, Solicitacao.class);
+                                Intent intent = new Intent
+                                        (MainActivity.this, Solicitacao.class);
                                 startActivity(intent);
                                 finish();
                             }
                         }
-                    },2000);
+                    },1500);
                 }else{
-                    alert("Informações Incorretas");
+                    alert(mensagens[2]);
                 }
             }
         });
-
     }
 
-    ////Metodo para iniciar todos os Componentes
-
+    //Inicilialização de Componetes/Registro de ID´s
     private void IniciarComponentes(){
         tEmail = findViewById(R.id.tEmail);
         tSenha = findViewById(R.id.tSenha);
         btLogin = findViewById(R.id.btLogin);
         tProgressBar = findViewById(R.id.tProgressBar);
         tlMostrar_Senha = findViewById(R.id.tlMostrar_Senha);
-
     }
 
-    ////Gerador do alerta
-
+    //Metodos de Alertas
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }

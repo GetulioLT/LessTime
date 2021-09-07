@@ -212,7 +212,7 @@ public class cadastroteste extends AppCompatActivity {
         CbMostrarSenha_Cadastro.setChecked(false);
     }
 
-    //Registrando Id das variáveis
+    //Inicilialização de Componetes/Registro de ID´s
     private void IniciarComponentes(){
         BtnCadastrar = findViewById(R.id.BtnCadastrar);
         BtnVoltar_Cadastro = findViewById(R.id.BtnVoltar_Cadastro);

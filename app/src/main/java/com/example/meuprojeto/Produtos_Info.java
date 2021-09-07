@@ -75,11 +75,5 @@ public class Produtos_Info {
         public void salvar() {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
                 reference.child("Produtos").child(getProduto()).setValue(this);
-
-        }
-
-        @Override
-        public String toString() {
-                return Produto;
         }
 }

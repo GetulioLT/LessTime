@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
@@ -32,7 +31,8 @@
                 android:paddingLeft="10sp"
                 android:text="Cadastro de Pedidos"
                 android:textColor="@color/Branco"
-                android:textSize="28sp" />
+                android:textSize="28sp"
+                tools:ignore="RtlSymmetry" />
 
             <Button
                 android:id="@+id/BtnVoltar_CadastroP"
@@ -70,7 +70,7 @@
                     android:inputType="text" />
 
                 <EditText
-                    android:id="@+id/edtCadastro_Local"
+                    android:id="@+id/EdtCadastro_Local"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -122,7 +122,6 @@
                         android:ems="10"
                         android:hint="Código"
                         android:inputType="text" />
-
                 </LinearLayout>
 
                 <ImageView
@@ -132,11 +131,9 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:src="@drawable/produto"/>
-
             </LinearLayout>
 
         </LinearLayout>
-
         <Button
             android:id="@+id/BtnCadastrar"
             android:layout_width="wrap_content"
@@ -159,12 +156,12 @@
 
         <ProgressBar
             android:id="@+id/ProgressBarP"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/Branco"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            style="?android:attr/progressBarStyle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="180dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

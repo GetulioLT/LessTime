@@ -7,39 +7,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import java.util.ArrayList;
+import java.util.Objects;
 
 public class Solicitacao extends AppCompatActivity {
 
+    //Declarando Variáveis
     Button BtnVoltar_Solicitação, BtnAddP_Solicitação, BtnEnviar_Solicitação,
             BtnCancelar_Solicitação, Btn_popup;
     EditText EdtQuantP_Solicitação, Nome_prod_popup;
     TextView TvCódigoP_Solicitação, TvNomeP_Solicitação, Nome_popup;
     RecyclerView solicitação_list, List_popup;
-
     AlertDialog.Builder dialogbuilder;
     AlertDialog dialog;
-
     FirebaseFirestore bd = FirebaseFirestore.getInstance();
     String UsuarioID;
 
@@ -50,7 +41,7 @@ public class Solicitacao extends AppCompatActivity {
 
         IniciarComponentes();
 
-
+        //Voltar Tela Inicial
         BtnVoltar_Solicitação.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +51,7 @@ public class Solicitacao extends AppCompatActivity {
             }
         });
 
+        //Ir para a tela de Pesquisa de Produto
         Btn_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,11 +64,12 @@ public class Solicitacao extends AppCompatActivity {
         });
     }
 
+    //Obtenção do Nome do Usúario Logado
     @Override
     protected void onStart() {
         super.onStart();
 
-        UsuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        UsuarioID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         DocumentReference documentReference = bd
                 .collection("Usuarios").document(UsuarioID);
@@ -104,6 +97,7 @@ public class Solicitacao extends AppCompatActivity {
 
     }*/
 
+    //Inicilialização de Componetes/Registro de ID´s
     private void IniciarComponentes() {
         BtnVoltar_Solicitação = findViewById(R.id.Btn_Voltar_Solicitação);
         BtnAddP_Solicitação = findViewById(R.id.BtnAddP_Solicitação);

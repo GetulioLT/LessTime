@@ -2,10 +2,10 @@ package com.example.meuprojeto;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,11 +31,10 @@ import java.util.UUID;
 
 public class Cadastro_Produtos extends AppCompatActivity {
 
-    ////Declarando Variáveis
-
+    //Declarando Variáveis
     Button BtnVoltar_CadastroP, BtnCadastrar, BtnCancelar;
     EditText EdtCadastro_Produto, EdtCadastro_Quant, EdtCadastro_Codigo,
-            edtCadastro_Local, EdtCadastro_Descrição;
+            EdtCadastro_Local, EdtCadastro_Descrição;
     ProgressBar ProgressBarP;
     ImageView ImagemProduto;
     String Url;
@@ -74,26 +73,46 @@ public class Cadastro_Produtos extends AppCompatActivity {
         BtnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CadastroProdutos();
-                ProgressBarP.setVisibility(View.VISIBLE);
+                String produto = EdtCadastro_Produto.getText().toString();
+                String quantidade = EdtCadastro_Quant.getText().toString();
+                String codigo = EdtCadastro_Codigo.getText().toString();
+                String local = EdtCadastro_Local.getText().toString();
+                String descrição = EdtCadastro_Descrição.getText().toString();
 
-                if (!TextUtils.isEmpty(Produtos_Info.getProduto())
-                        && !TextUtils.isEmpty(Produtos_Info.getCódigo())
-                        && !TextUtils.isEmpty(Produtos_Info.getLocal())
-                        && !TextUtils.isEmpty(Produtos_Info.getQuantidade())
-                        && !TextUtils.isEmpty(Produtos_Info.getProduto())){
-                    ProgressBarP.setVisibility(View.INVISIBLE);
-
-                    Produtos_Info.salvar();
-                    alert(mensagens[0]);
-                }else {
-                    ProgressBarP.setVisibility(View.INVISIBLE);
+                //Condição de Verificação de Campos Vazios
+                if (produto.isEmpty() || quantidade.isEmpty() || codigo.isEmpty() ||
+                        local.isEmpty() || descrição.isEmpty() || mSelectedUri == null){
                     alert(mensagens[1]);
+                }else{
+                    ProgressBarP.setVisibility(View.VISIBLE);
+
+                    SalvarImage();
+
+                    //Temporizador para Espera de Geração da Url
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            CadastroProdutos();
+
+                            if (!TextUtils.isEmpty(Produtos_Info.getProduto())
+                                    && !TextUtils.isEmpty(Produtos_Info.getCódigo())
+                                    && !TextUtils.isEmpty(Produtos_Info.getLocal())
+                                    && !TextUtils.isEmpty(Produtos_Info.getQuantidade())
+                                    && !TextUtils.isEmpty(Produtos_Info.getProduto())
+                                    && !TextUtils.isEmpty(Produtos_Info.getImagem())){
+
+                                Produtos_Info.salvar();
+                                alert(mensagens[0]);
+                            }
+                            LimparCampos();
+                            ProgressBarP.setVisibility(View.INVISIBLE);
+                        }
+                    },4000);
                 }
-                ConcluirCadastro();
             }
         });
 
+        //Cancelar Cadastro
         BtnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,18 +121,12 @@ public class Cadastro_Produtos extends AppCompatActivity {
         });
     }
 
-    private void ConcluirCadastro() {
-        Intent it = new Intent(Cadastro_Produtos.this, Tela_dos_pedidos.class);
-        startActivity(it);
-        finish();
-    }
-
+    //Metodo de Seleção de Imagem da Galeria, e transforma em Uri
     private void SelecionarImg() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, 0);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -126,12 +139,12 @@ public class Cadastro_Produtos extends AppCompatActivity {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedUri);
                 ImagemProduto.setImageDrawable(new BitmapDrawable(bitmap));
                 Log.d("dyww sucesso", String.valueOf(ImagemProduto));
-                SalvarImage();
             } catch (IOException e) {
             }
         }
     }
 
+    //Geração da Url e salvamento no Storage
     private void SalvarImage() {
         String filename = UUID.randomUUID().toString();
         final StorageReference ref = FirebaseStorage.getInstance()
@@ -158,23 +171,26 @@ public class Cadastro_Produtos extends AppCompatActivity {
         });
     }
 
+    //Metódo para Limpar Campos
     private void LimparCampos() {
         EdtCadastro_Produto.getText().clear();
         EdtCadastro_Quant.getText().clear();
         EdtCadastro_Codigo.getText().clear();
-        edtCadastro_Local.getText().clear();
+        EdtCadastro_Local.getText().clear();
         EdtCadastro_Descrição.getText().clear();
     }
 
+    //Metódo para Enviar as Informações ao Produtos_info
     private void CadastroProdutos() {
         Produtos_Info.setProduto(EdtCadastro_Produto.getText().toString());
         Produtos_Info.setQuantidade(EdtCadastro_Quant.getText().toString());
         Produtos_Info.setCódigo(EdtCadastro_Codigo.getText().toString());
-        Produtos_Info.setLocal(edtCadastro_Local.getText().toString());
+        Produtos_Info.setLocal(EdtCadastro_Local.getText().toString());
         Produtos_Info.setDescrição(EdtCadastro_Descrição.getText().toString());
         Produtos_Info.setImagem(Url);
     }
 
+    //Registrando Id das variáveis
     private void IniciarComponentes() {
         BtnVoltar_CadastroP = findViewById(R.id.BtnVoltar_CadastroP);
         BtnCadastrar = findViewById(R.id.BtnCadastrar);
@@ -182,14 +198,15 @@ public class Cadastro_Produtos extends AppCompatActivity {
         EdtCadastro_Produto = findViewById(R.id.EdtCadastro_Produto);
         EdtCadastro_Quant = findViewById(R.id.EdtCadastro_Quant);
         EdtCadastro_Codigo = findViewById(R.id.EdtCadastro_Codigo);
-        edtCadastro_Local = findViewById(R.id.edtCadastro_Local);
+        EdtCadastro_Local = findViewById(R.id.EdtCadastro_Local);
         EdtCadastro_Descrição = findViewById(R.id.EdtCadastro_Descrição);
         ProgressBarP = findViewById(R.id.ProgressBarP);
         ImagemProduto = findViewById(R.id.ImagemPro);
+        ProgressBarP.setVisibility(View.INVISIBLE);
     }
 
-    private void
-    alert(String s) {
+    //Metodos de Alertas
+    private void alert(String s) {
         Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
 }

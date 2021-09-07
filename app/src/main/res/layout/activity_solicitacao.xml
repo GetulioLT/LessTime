@@ -162,7 +162,6 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
 
     <Button
@@ -199,7 +198,6 @@
                 android:layout_marginStart="105dp"
                 android:background="@color/Padrão_escuro"
                 android:orientation="horizontal">
-
 
                 <TextView
                     android:id="@+id/textView10"
@@ -274,8 +272,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

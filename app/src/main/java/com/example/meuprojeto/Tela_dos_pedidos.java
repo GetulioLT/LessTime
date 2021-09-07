@@ -7,15 +7,11 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 public class Tela_dos_pedidos extends AppCompatActivity {
 
-    Button BtnVoltar_Pedidos, BtnEstoque_Pedidos, BtnEntrada_Pedidos, BtnSaída_Pedidos, BtnCadastrar_Pedidos;
-
-    FirebaseDatabase Database ;
-    DatabaseReference reference;
+    //Declarando Variáveis
+    Button BtnVoltar_Pedidos, BtnEstoque_Pedidos, BtnEntrada_Pedidos,
+            BtnSaída_Pedidos, BtnCadastrar_Pedidos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +20,7 @@ public class Tela_dos_pedidos extends AppCompatActivity {
 
         IniciarComponentes();
 
+        //Voltar Tela Inicial
         BtnVoltar_Pedidos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,6 +30,7 @@ public class Tela_dos_pedidos extends AppCompatActivity {
             }
         });
 
+        //Direcionamento para Tela de Estoque
         BtnEstoque_Pedidos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,6 +40,7 @@ public class Tela_dos_pedidos extends AppCompatActivity {
             }
         });
 
+        //Direcionamento para Tela de His.Entada
         BtnEntrada_Pedidos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +50,7 @@ public class Tela_dos_pedidos extends AppCompatActivity {
             }
         });
 
+        //Direcionamento para Tela de Hist.Saídas
         BtnSaída_Pedidos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +60,7 @@ public class Tela_dos_pedidos extends AppCompatActivity {
             }
         });
 
+        //Direcionamento para Tela de Cadastro de Pedidos
         BtnCadastrar_Pedidos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,9 +69,9 @@ public class Tela_dos_pedidos extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
+    //Inicilialização de Componetes/Registro de ID´s
     private void IniciarComponentes() {
         BtnVoltar_Pedidos = findViewById(R.id.BtnVoltar_Pedidos);
         BtnEstoque_Pedidos = findViewById(R.id.BtnEstoque_Pedidos);

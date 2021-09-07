@@ -55,7 +55,6 @@
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
@@ -80,7 +79,6 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView4" />
-
 
             <TextView
                 android:id="@+id/textView5"

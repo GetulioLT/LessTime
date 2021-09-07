@@ -1,9 +1,6 @@
 package com.example.meuprojeto;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.net.UrlQuerySanitizer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.auth.User;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -56,10 +50,8 @@ public class Myadapter extends RecyclerView.Adapter<Myadapter.MyViewHolder> {
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-
         TextView Produto, Quantidade, Código, Local, Descrição;
         ImageView Imagem;
-
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

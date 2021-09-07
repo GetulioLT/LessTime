@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class Estoque extends AppCompatActivity {
 
+    //Declarando Variáveis
     Button btnVoltar_Estoque;
     RecyclerView produtos_list;
-
     FirebaseDatabase FirebaseDatabase;
     DatabaseReference reference;
     Myadapter Myadapter;
@@ -33,33 +33,32 @@ public class Estoque extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estoque);
 
+        IniciarComponentes();
+
+        //Recuperação dos dados da Firebase
         reference = FirebaseDatabase.getInstance().getReference("Produtos");
-        produtos_list = findViewById(R.id.Estoque_list);
+
         produtos_list.setHasFixedSize(true);
         produtos_list.setLayoutManager(new LinearLayoutManager(this));
 
-        list = new ArrayList<Produtos_Info>();
-        Myadapter = new Myadapter(this,list);
         produtos_list.setAdapter(Myadapter);
 
+        //Geração da Lista do Estoque
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-
                     Produtos_Info user = dataSnapshot.getValue(Produtos_Info.class);
                     list.add(user);
                 }
                 Myadapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
-        btnVoltar_Estoque = findViewById(R.id.btnVoltar_Estoque);
+        //Voltar para tela de pedidos
         btnVoltar_Estoque.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,5 +67,13 @@ public class Estoque extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    //Registrando Id das variáveis
+    private void IniciarComponentes() {
+        produtos_list = findViewById(R.id.Estoque_list);
+        list = new ArrayList<Produtos_Info>();
+        Myadapter = new Myadapter(this,list);
+        btnVoltar_Estoque = findViewById(R.id.btnVoltar_Estoque);
     }
 }
