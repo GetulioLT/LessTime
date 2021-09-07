@@ -2,6 +2,7 @@ package com.example.meuprojeto;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,14 +38,10 @@ public class Cadastro_Produtos extends AppCompatActivity {
             edtCadastro_Local, EdtCadastro_Descrição;
     ProgressBar ProgressBarP;
     ImageView ImagemProduto;
-
-    Produtos_Info Produtos_Info;
-
-
     String Url;
-
+    String[] mensagens = {"Produto Registrado com sucesso", "Informações faltando"};
     private Uri mSelectedUri;
-
+    Produtos_Info Produtos_Info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +52,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
 
         Produtos_Info = new Produtos_Info();
 
-        ////Voltar para tela de pedidos
-
+        //Voltar para tela de pedidos
         BtnVoltar_CadastroP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +62,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
             }
         });
 
+        //Seleção de Imagem
         ImagemProduto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,13 +70,11 @@ public class Cadastro_Produtos extends AppCompatActivity {
             }
         });
 
-        ////Cadastro de produtos
-
+        //Cadastro de produtos
         BtnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CadastroProdutos();
-
                 ProgressBarP.setVisibility(View.VISIBLE);
 
                 if (!TextUtils.isEmpty(Produtos_Info.getProduto())
@@ -88,26 +83,29 @@ public class Cadastro_Produtos extends AppCompatActivity {
                         && !TextUtils.isEmpty(Produtos_Info.getQuantidade())
                         && !TextUtils.isEmpty(Produtos_Info.getProduto())){
                     ProgressBarP.setVisibility(View.INVISIBLE);
+
                     Produtos_Info.salvar();
-                    alert("Produto Registrado com sucesso");
+                    alert(mensagens[0]);
                 }else {
                     ProgressBarP.setVisibility(View.INVISIBLE);
-                    alert("Informações faltando");
+                    alert(mensagens[1]);
                 }
-                LimparCampos();
+                ConcluirCadastro();
             }
         });
 
         BtnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EdtCadastro_Produto.getText().clear();
-                EdtCadastro_Quant.getText().clear();
-                EdtCadastro_Codigo.getText().clear();
-                edtCadastro_Local.getText().clear();
-                EdtCadastro_Descrição.getText().clear();
+                LimparCampos();
             }
         });
+    }
+
+    private void ConcluirCadastro() {
+        Intent it = new Intent(Cadastro_Produtos.this, Tela_dos_pedidos.class);
+        startActivity(it);
+        finish();
     }
 
     private void SelecionarImg() {
@@ -148,9 +146,6 @@ public class Cadastro_Produtos extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         Url = uri.toString();
-
-
-
                         Log.d("dyww ulr", uri.toString());
                     }
                 });
