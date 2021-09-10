@@ -73,7 +73,6 @@ public class Popup extends AppCompatActivity {
         
         IniciarFirebase();
 
-
         Btn_voltar_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +83,15 @@ public class Popup extends AppCompatActivity {
         });
 
     }
+
+    //Botão Voltar do Celular
+    @Override
+    public void onBackPressed() {
+        Intent it = new Intent(Popup.this, Solicitacao.class);
+        startActivity(it);
+        finish();
+    }
+
     private void IniciarFirebase() {
         FirebaseApp.initializeApp(Popup.this);
         FirebaseDatabase = FirebaseDatabase.getInstance();

@@ -33,4 +33,12 @@ public class Historico_Entrada extends AppCompatActivity {
             }
         });
     }
+
+    //Botão Voltar do Celular
+    @Override
+    public void onBackPressed() {
+        Intent it = new Intent(Historico_Entrada.this, Tela_dos_pedidos.class);
+        startActivity(it);
+        finish();
+    }
 }

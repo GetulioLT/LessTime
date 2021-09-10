@@ -16,7 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.Key;
 import java.util.ArrayList;
+
 
 public class Estoque extends AppCompatActivity {
 
@@ -67,6 +69,14 @@ public class Estoque extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    //Botão Voltar do Celular
+    @Override
+    public void onBackPressed() {
+        Intent it = new Intent(Estoque.this, Tela_dos_pedidos.class);
+        startActivity(it);
+        finish();
     }
 
     //Registrando Id das variáveis

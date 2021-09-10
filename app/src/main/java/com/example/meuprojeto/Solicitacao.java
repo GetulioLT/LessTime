@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -24,10 +25,11 @@ import java.util.Objects;
 public class Solicitacao extends AppCompatActivity {
 
     //Declarando Variáveis
-    Button BtnVoltar_Solicitação, BtnAddP_Solicitação, BtnEnviar_Solicitação,
+    Button BtnDeslogar_Solicitação, BtnAddP_Solicitação, BtnEnviar_Solicitação,
             BtnCancelar_Solicitação, Btn_popup;
     EditText EdtQuantP_Solicitação, Nome_prod_popup;
-    TextView TvCódigoP_Solicitação, TvNomeP_Solicitação, Nome_popup;
+    TextView TvCódigoP_Solicitação, TvNomeP_Solicitação, Nome_popup, View_Pop_prioridade,
+            View_Prioridade;
     RecyclerView solicitação_list, List_popup;
     AlertDialog.Builder dialogbuilder;
     AlertDialog dialog;
@@ -42,10 +44,11 @@ public class Solicitacao extends AppCompatActivity {
         IniciarComponentes();
 
         //Voltar Tela Inicial
-        BtnVoltar_Solicitação.setOnClickListener(new View.OnClickListener() {
+        BtnDeslogar_Solicitação.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent (Solicitacao.this, MainActivity.class);
+                FirebaseAuth.getInstance().signOut();
+                Intent it = new Intent(Solicitacao.this, MainActivity.class);
                 startActivity(it);
                 finish();
             }
@@ -62,7 +65,25 @@ public class Solicitacao extends AppCompatActivity {
                 /*Criarpopup();*/
             }
         });
+
+        View_Pop_prioridade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AbrirPopup_Prio();
+            }
+        });
     }
+
+    private void AbrirPopup_Prio() {
+        dialogbuilder = new AlertDialog.Builder(this);
+        View popup_prio = getLayoutInflater().inflate(R.layout.popup_prioridade, null);
+
+        dialogbuilder.setView(popup_prio);
+        dialog = dialogbuilder.create();
+        dialog.show();
+    }
+
+
 
     //Obtenção do Nome do Usúario Logado
     @Override
@@ -97,9 +118,18 @@ public class Solicitacao extends AppCompatActivity {
 
     }*/
 
+    //Botão Voltar do Celular
+    @Override
+    public void onBackPressed() {
+        FirebaseAuth.getInstance().signOut();
+        Intent it = new Intent(Solicitacao.this, MainActivity.class);
+        startActivity(it);
+        finish();
+    }
+
     //Inicilialização de Componetes/Registro de ID´s
     private void IniciarComponentes() {
-        BtnVoltar_Solicitação = findViewById(R.id.Btn_Voltar_Solicitação);
+        BtnDeslogar_Solicitação = findViewById(R.id.Btn_Deslogar_Solicitação);
         BtnAddP_Solicitação = findViewById(R.id.BtnAddP_Solicitação);
         BtnEnviar_Solicitação = findViewById(R.id.BtnEnviar_Solicitação);
         BtnCancelar_Solicitação = findViewById(R.id.BtnCancelar_Solicitação);
@@ -108,5 +138,8 @@ public class Solicitacao extends AppCompatActivity {
         TvNomeP_Solicitação = findViewById(R.id.TvNomeP_Solicitação);
         solicitação_list = findViewById(R.id.Solicitação_list);
         Btn_popup = findViewById(R.id.Btn_popup);
+        View_Prioridade = findViewById(R.id.View_Prioridade);
+        View_Pop_prioridade = findViewById(R.id.View_Pop_prioridade);
+
     }
 }

@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
     final FirebaseFirestore bd = FirebaseFirestore.getInstance();
     String usuarioID;
     String Rgrp;
-    final String[] mensagens = {"Preencha todos os Campos", "Preencha todos os Campos",
-            "Preencha todos os Campos"};
+    String RgrpLog;
+    final String[] mensagens = {"Preencha todos os Campos", "Usúario de Cadastro Logado com Sucesso",
+            "Usúario Logado com Sucesso", "Usúario não Cadastrado"};
+    private String IDLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,23 +126,72 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             if (Rgrp.equals("Almoxarife")){
-                                Intent intent = new Intent
-                                        (MainActivity.this, Tela_dos_pedidos.class);
-                                startActivity(intent);
-                                finish();
+                                Almoxarife();
+                                alert(mensagens[2]);
                             }else {
-                                Intent intent = new Intent
-                                        (MainActivity.this, Solicitacao.class);
-                                startActivity(intent);
-                                finish();
+                                alert(mensagens[2]);
+                                Solicitante();
                             }
                         }
                     },1500);
                 }else{
-                    alert(mensagens[2]);
+                    alert(mensagens[3]);
+                    tProgressBar.setVisibility(View.INVISIBLE);
                 }
             }
         });
+    }
+
+    //Método para deixar Usúario Logado
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser usuarioAtual = FirebaseAuth.getInstance().getCurrentUser();
+
+        Log.d("dyww , log", String.valueOf(usuarioAtual));
+        if (usuarioAtual !=null){
+            IDLog = usuarioAtual.getUid();
+
+            DocumentReference documentReference = bd.collection("Usuarios")
+                    .document(IDLog);
+            Log.d("dyww , idlogado", IDLog);
+
+            documentReference.get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()){
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (Objects.requireNonNull(documentSnapshot).exists()){
+                            RgrpLog = (String) Objects.requireNonNull(documentSnapshot
+                                    .getData()).get("Rgrp");
+                            Log.d("dyww RgrpLog", RgrpLog);
+                            if (RgrpLog.equals("Almoxarife")){
+                                Almoxarife();
+                            }else {
+                                Solicitante();
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    //Direcionamento Almoxarife
+    private void Almoxarife() {
+        Intent intent = new Intent
+                (MainActivity.this, Tela_dos_pedidos.class);
+        startActivity(intent);
+        finish();
+    }
+
+    //Direcionamento Solicitante
+    private void Solicitante() {
+        Intent intent = new Intent
+                (MainActivity.this, Solicitacao.class);
+        startActivity(intent);
+        finish();
     }
 
     //Inicilialização de Componetes/Registro de ID´s

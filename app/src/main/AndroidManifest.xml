@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Popup_prioridade"
+            android:exported="true" />
+        <activity
             android:name=".Popup"
             android:exported="true" />
         <activity

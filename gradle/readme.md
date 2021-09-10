@@ -1,1 +1,0 @@
-Versionamento do app Lesstime

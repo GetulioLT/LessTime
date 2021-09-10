@@ -190,6 +190,14 @@ public class Cadastro_Produtos extends AppCompatActivity {
         Produtos_Info.setImagem(Url);
     }
 
+    //Botão Voltar do Celular
+    @Override
+    public void onBackPressed() {
+        Intent it = new Intent(Cadastro_Produtos.this, Tela_dos_pedidos.class);
+        startActivity(it);
+        finish();
+    }
+
     //Registrando Id das variáveis
     private void IniciarComponentes() {
         BtnVoltar_CadastroP = findViewById(R.id.BtnVoltar_CadastroP);
