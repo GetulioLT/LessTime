@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
@@ -32,11 +33,14 @@ public class Popup extends AppCompatActivity {
     EditText Nome_prod_popup;
     RecyclerView List_popup;
     Button Btn_voltar_popup;
+    ListView listView;
 
     FirebaseDatabase FirebaseDatabase;
     DatabaseReference reference;
     Myadapter Myadapter;
     ArrayList<Produtos_Info> list;
+
+    Produtos_Info produtoselecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +85,6 @@ public class Popup extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     //Botão Voltar do Celular

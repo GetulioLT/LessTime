@@ -27,10 +27,9 @@ public class Solicitacao extends AppCompatActivity {
     //Declarando Variáveis
     Button BtnDeslogar_Solicitação, BtnAddP_Solicitação, BtnEnviar_Solicitação,
             BtnCancelar_Solicitação, Btn_popup;
-    EditText EdtQuantP_Solicitação, Nome_prod_popup;
-    TextView TvCódigoP_Solicitação, TvNomeP_Solicitação, Nome_popup, View_Pop_prioridade,
-            View_Prioridade;
-    RecyclerView solicitação_list, List_popup;
+    EditText EdtQuantP_Solicitação;
+    TextView TvCódigoP_Solicitação, TvNomeP_Solicitação;
+    RecyclerView solicitação_list;
     AlertDialog.Builder dialogbuilder;
     AlertDialog dialog;
     FirebaseFirestore bd = FirebaseFirestore.getInstance();
@@ -65,25 +64,7 @@ public class Solicitacao extends AppCompatActivity {
                 /*Criarpopup();*/
             }
         });
-
-        View_Pop_prioridade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AbrirPopup_Prio();
-            }
-        });
     }
-
-    private void AbrirPopup_Prio() {
-        dialogbuilder = new AlertDialog.Builder(this);
-        View popup_prio = getLayoutInflater().inflate(R.layout.popup_prioridade, null);
-
-        dialogbuilder.setView(popup_prio);
-        dialog = dialogbuilder.create();
-        dialog.show();
-    }
-
-
 
     //Obtenção do Nome do Usúario Logado
     @Override
@@ -138,8 +119,5 @@ public class Solicitacao extends AppCompatActivity {
         TvNomeP_Solicitação = findViewById(R.id.TvNomeP_Solicitação);
         solicitação_list = findViewById(R.id.Solicitação_list);
         Btn_popup = findViewById(R.id.Btn_popup);
-        View_Prioridade = findViewById(R.id.View_Prioridade);
-        View_Pop_prioridade = findViewById(R.id.View_Pop_prioridade);
-
     }
 }
