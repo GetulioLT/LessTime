@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
@@ -33,14 +32,11 @@ public class Popup extends AppCompatActivity {
     EditText Nome_prod_popup;
     RecyclerView List_popup;
     Button Btn_voltar_popup;
-    ListView listView;
 
     FirebaseDatabase FirebaseDatabase;
     DatabaseReference reference;
-    Myadapter Myadapter;
-    ArrayList<Produtos_Info> list;
-
-    Produtos_Info produtoselecionado;
+    private Pesquisa_Adapter pesquisa_adapter;
+    List<Pesquisa_info> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,20 +49,17 @@ public class Popup extends AppCompatActivity {
         List_popup = findViewById(R.id.List_popup);
         List_popup.setHasFixedSize(true);
         List_popup.setLayoutManager(new LinearLayoutManager(this));
-
-        list = new ArrayList<Produtos_Info>();
-        Myadapter = new Myadapter(this,list);
-        List_popup.setAdapter(Myadapter);
+        List_popup.setAdapter(pesquisa_adapter);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Produtos_Info user = dataSnapshot.getValue(Produtos_Info.class);
+                    Pesquisa_info user = dataSnapshot.getValue(Pesquisa_info.class);
                     list.add(user);
                 }
-                Myadapter.notifyDataSetChanged();
+                pesquisa_adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -105,5 +98,7 @@ public class Popup extends AppCompatActivity {
         Nome_popup = findViewById(R.id.Nome_popup);
         Nome_prod_popup = findViewById(R.id.Nome_prod_popup);
         Btn_voltar_popup = findViewById(R.id.Btn_voltar_popup);
+        list = new ArrayList<Pesquisa_info>();
+        pesquisa_adapter = new Pesquisa_Adapter(this, list);
     }
 }

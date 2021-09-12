@@ -41,6 +41,8 @@ public class Cadastro_Produtos extends AppCompatActivity {
     String[] mensagens = {"Produto Registrado com sucesso", "Informações faltando"};
     private Uri mSelectedUri;
     Produtos_Info Produtos_Info;
+    Estoque_info Estoque_info;
+    Pesquisa_info Pesquisa_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,8 @@ public class Cadastro_Produtos extends AppCompatActivity {
         IniciarComponentes();
 
         Produtos_Info = new Produtos_Info();
+        Estoque_info = new Estoque_info();
+        Pesquisa_info = new Pesquisa_info();
 
         //Voltar para tela de pedidos
         BtnVoltar_CadastroP.setOnClickListener(new View.OnClickListener() {
@@ -182,12 +186,37 @@ public class Cadastro_Produtos extends AppCompatActivity {
 
     //Metódo para Enviar as Informações ao Produtos_info
     private void CadastroProdutos() {
+        setProduto_info();
+
+        setEstoque();
+
+        setPesquisa();
+    }
+
+    private void setPesquisa() {
+        Pesquisa_info.setProduto(EdtCadastro_Produto.getText().toString());
+        Pesquisa_info.setQuantidade(EdtCadastro_Quant.getText().toString());
+        Pesquisa_info.setCódigo(EdtCadastro_Codigo.getText().toString());
+        Pesquisa_info.setDescrição(EdtCadastro_Descrição.getText().toString());
+        Pesquisa_info.setImagem(Url);
+    }
+
+    private void setEstoque() {
         Produtos_Info.setProduto(EdtCadastro_Produto.getText().toString());
         Produtos_Info.setQuantidade(EdtCadastro_Quant.getText().toString());
         Produtos_Info.setCódigo(EdtCadastro_Codigo.getText().toString());
         Produtos_Info.setLocal(EdtCadastro_Local.getText().toString());
         Produtos_Info.setDescrição(EdtCadastro_Descrição.getText().toString());
         Produtos_Info.setImagem(Url);
+    }
+
+    private void setProduto_info() {
+        Estoque_info.setProduto(EdtCadastro_Produto.getText().toString());
+        Estoque_info.setQuantidade(EdtCadastro_Quant.getText().toString());
+        Estoque_info.setCódigo(EdtCadastro_Codigo.getText().toString());
+        Estoque_info.setLocal(EdtCadastro_Local.getText().toString());
+        Estoque_info.setDescrição(EdtCadastro_Descrição.getText().toString());
+        Estoque_info.setImagem(Url);
     }
 
     //Botão Voltar do Celular

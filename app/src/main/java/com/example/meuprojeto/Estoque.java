@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.security.Key;
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class Estoque extends AppCompatActivity {
 
@@ -27,8 +27,10 @@ public class Estoque extends AppCompatActivity {
     RecyclerView produtos_list;
     FirebaseDatabase FirebaseDatabase;
     DatabaseReference reference;
-    Myadapter Myadapter;
-    ArrayList<Produtos_Info> list;
+    //Myadapter Myadapter;
+    List<Estoque_info> list;
+
+    private Estoque_Adapter estoque_adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,19 +43,20 @@ public class Estoque extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Produtos");
 
         produtos_list.setHasFixedSize(true);
-        produtos_list.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        produtos_list.setLayoutManager(linearLayoutManager);
+        produtos_list.setAdapter(estoque_adapter);
 
-        produtos_list.setAdapter(Myadapter);
 
         //Geração da Lista do Estoque
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Produtos_Info user = dataSnapshot.getValue(Produtos_Info.class);
+                    Estoque_info user = dataSnapshot.getValue(Estoque_info.class);
                     list.add(user);
                 }
-                Myadapter.notifyDataSetChanged();
+                estoque_adapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -82,8 +85,8 @@ public class Estoque extends AppCompatActivity {
     //Registrando Id das variáveis
     private void IniciarComponentes() {
         produtos_list = findViewById(R.id.Estoque_list);
-        list = new ArrayList<Produtos_Info>();
-        Myadapter = new Myadapter(this,list);
+        list = new ArrayList<Estoque_info>();
+        estoque_adapter = new Estoque_Adapter(this, list);
         btnVoltar_Estoque = findViewById(R.id.btnVoltar_Estoque);
     }
 }

@@ -1,9 +1,5 @@
  package com.example.meuprojeto;
 
-import android.graphics.Bitmap;
-import android.provider.MediaStore;
-import android.util.Log;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
