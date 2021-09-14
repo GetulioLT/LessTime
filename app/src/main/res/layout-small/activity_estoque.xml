@@ -13,6 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -23,7 +24,7 @@
                 android:paddingLeft="5sp"
                 android:text="Controle de Estoque"
                 android:textColor="@color/Branco"
-                android:textSize="24sp"
+                android:textSize="12sp"
                 tools:ignore="RtlSymmetry" />
 
             <Space
@@ -33,17 +34,18 @@
 
             <Button
                 android:id="@+id/btnVoltar_Estoque"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:text="@string/Botão_Voltar" />
+                android:text="@string/Botão_Voltar"
+                android:textSize="10sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginStart="105dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
             android:background="@color/Padrão_escuro"
             android:orientation="horizontal">
 
@@ -51,12 +53,12 @@
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:paddingLeft="5sp"
-                android:paddingRight="5sp"
                 android:text="Produto"
                 android:textColor="@color/Branco"
-                android:textSize="16sp" />
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -67,7 +69,7 @@
                 android:paddingRight="5sp"
                 android:text="Quant."
                 android:textColor="@color/Branco"
-                android:textSize="16sp" />
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -78,7 +80,7 @@
                 android:paddingRight="5sp"
                 android:text="Código"
                 android:textColor="@color/Branco"
-                android:textSize="16sp" />
+                android:textSize="10sp" />
 
         </LinearLayout>
 
@@ -86,7 +88,8 @@
             android:id="@+id/Estoque_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="5dp" />
+            android:layout_marginStart="3dp"
+            android:paddingHorizontal="5sp" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

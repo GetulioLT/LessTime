@@ -17,7 +17,6 @@
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,18 +27,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="10sp"
+                android:paddingLeft="5dp"
                 android:text="Cadastro de Pedidos"
                 android:textColor="@color/Branco"
-                android:textSize="28sp"
+                android:textSize="16sp"
                 tools:ignore="RtlSymmetry" />
 
             <Button
                 android:id="@+id/BtnVoltar_CadastroP"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:text="@string/Botão_Voltar" />
+                android:text="@string/Botão_Voltar"
+                android:textSize="8sp" />
 
         </LinearLayout>
 
@@ -49,45 +49,49 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-            tools:layout_editor_absoluteX="1dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="3dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/EdtCadastro_Produto"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/Branco"
                     android:ems="10"
                     android:hint="Produto"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textSize="10sp" />
 
                 <EditText
                     android:id="@+id/EdtCadastro_Local"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:backgroundTint="@color/Branco"
                     android:ems="10"
                     android:hint="Local"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textSize="10sp" />
 
                 <EditText
                     android:id="@+id/EdtCadastro_Descrição"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:backgroundTint="@color/Branco"
                     android:ems="10"
                     android:hint="Descrição"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textSize="10sp" />
 
             </LinearLayout>
 
@@ -111,7 +115,8 @@
                         android:backgroundTint="@color/Branco"
                         android:ems="10"
                         android:hint="Quant."
-                        android:inputType="text|number" />
+                        android:inputType="text|number"
+                        android:textSize="10sp" />
 
                     <EditText
                         android:id="@+id/EdtCadastro_Codigo"
@@ -121,36 +126,40 @@
                         android:backgroundTint="@color/Branco"
                         android:ems="10"
                         android:hint="Código"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
                 <ImageView
                     android:id="@+id/ImagemPro"
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:src="@drawable/produto"/>
+                    android:src="@drawable/produto" />
             </LinearLayout>
 
         </LinearLayout>
+
         <Button
             android:id="@+id/BtnCadastrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="75dp"
+            android:layout_marginEnd="50dp"
             android:text="Cadastrar"
+            android:textSize="8sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
         <Button
             android:id="@+id/BtnCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="40dp"
             android:text="Cancelar"
+            android:textSize="8sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 

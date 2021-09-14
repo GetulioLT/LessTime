@@ -11,8 +11,14 @@
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="5dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <ImageView
@@ -23,10 +29,11 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
-            android:background="@color/Padrão"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/Padrão"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <LinearLayout
@@ -83,21 +90,6 @@
 
 
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00FFFFFF"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
-
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="#00FFFFFF" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
