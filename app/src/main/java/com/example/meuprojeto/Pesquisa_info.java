@@ -1,6 +1,8 @@
 package com.example.meuprojeto;
 
-public class Pesquisa_info {
+import java.io.Serializable;
+
+public class Pesquisa_info implements Serializable {
 
     String Produto, Quantidade, Código, Local,
             Descrição, Imagem;

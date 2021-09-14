@@ -1,10 +1,13 @@
 package com.example.meuprojeto;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +33,7 @@ public class Pesquisa_Adapter extends RecyclerView.Adapter<Pesquisa_Adapter.View
 
         View view = layoutInflater.inflate(R.layout.itens_pesquisa, parent, false);
 
-        ViewHolderPesquisa holderPesquisa = new ViewHolderPesquisa(view);
+        ViewHolderPesquisa holderPesquisa = new ViewHolderPesquisa(view, parent.getContext());
 
         return holderPesquisa;
     }
@@ -61,13 +64,26 @@ public class Pesquisa_Adapter extends RecyclerView.Adapter<Pesquisa_Adapter.View
         public TextView list_Produto_pesq, list_Quant_pesq, list_Codigo_pesq, list_Descrição_pesq;
         public ImageView list_imagem_pesq;
 
-        public ViewHolderPesquisa(@NonNull View itemView) {
+        public ViewHolderPesquisa(@NonNull View itemView, Context context) {
             super(itemView);
             list_Produto_pesq = itemView.findViewById(R.id.list_Produto_pesq);
             list_Quant_pesq = itemView.findViewById(R.id.list_Quant_pesq);
             list_Codigo_pesq = itemView.findViewById(R.id.list_Codigo_pesq);
             list_Descrição_pesq = itemView.findViewById(R.id.list_Descrição_pesq);
             list_imagem_pesq = itemView.findViewById(R.id.list_imagem_pesq);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (dados.size() > 0) {
+                        Pesquisa_info produto_pesq = dados.get(getLayoutPosition());
+
+                        Intent it = new Intent(context, Solicitacao.class);
+                        it.putExtra("Produto_pesq", produto_pesq);
+                        context.startActivity(it);
+                    }
+                }
+            });
         }
     }
 }

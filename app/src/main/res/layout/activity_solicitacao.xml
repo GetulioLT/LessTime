@@ -53,7 +53,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView41"
+                android:id="@+id/Nome_Solicitante"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -92,11 +92,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/nome_produto3"
+                        android:id="@+id/Nome_Produto_Soli"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nome:"
-                        android:textColor="@color/Branco"
+                        android:hint="Nome:"
+                        android:textColorHint="@color/Branco"
                         android:textSize="18dp" />
 
                     <TextView
@@ -115,32 +115,16 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/EdtQuantP_Solicitação"
+                        android:id="@+id/Quantidade_Soli"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/Quantidade"
+                        android:inputType="number"
                         android:textColor="@color/Branco"
                         android:textColorHint="@color/Branco"
                         android:textSize="18dp" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:orientation="vertical">
 
-                        <ImageButton
-                            android:id="@+id/imageButton7"
-                            android:layout_width="25sp"
-                            android:layout_height="25sp"
-                            app:srcCompat="@drawable/mais" />
-
-                        <ImageButton
-                            android:id="@+id/imageButton8"
-                            android:layout_width="25sp"
-                            android:layout_height="25sp"
-                            app:srcCompat="@drawable/menos" />
-                    </LinearLayout>
                 </LinearLayout>
 
 
@@ -150,11 +134,11 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tvCódigoP_Solicitação2"
+                        android:id="@+id/Codigo_Produto_Soli"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Código"
-                        android:textColor="@color/Branco"
+                        android:hint="Código:"
+                        android:textColorHint="@color/Branco"
                         android:textSize="18dp" />
 
                     <TextView
@@ -166,11 +150,41 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Url_Produto_Solicitação"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/Quantidade_Estoque"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+
 
             <Space
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
+
+            <TextView
+                android:id="@+id/descrição_prod"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:text="TextView" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -186,7 +200,7 @@
                     android:text="Pesquisar" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/Imagem_Produto_Soli"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     app:srcCompat="@drawable/produto" />
@@ -216,7 +230,6 @@
         android:layout_width="match_parent"
         android:layout_height="415dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BtnAddP_Solicitação"
         tools:layout_editor_absoluteX="16dp">
 
@@ -226,53 +239,13 @@
             android:background="@color/Padrão"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="105dp"
-                android:background="@color/Padrão_escuro"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="5sp"
-                    android:paddingRight="5sp"
-                    android:text="Produto"
-                    android:textColor="@color/Branco"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="72dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="5sp"
-                    android:paddingRight="5sp"
-                    android:text="Quant."
-                    android:textColor="@color/Branco"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="5sp"
-                    android:paddingRight="5sp"
-                    android:text="Código"
-                    android:textColor="@color/Branco"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Solicitação_list"
                 android:layout_width="match_parent"
                 android:layout_height="330dp"
-                android:layout_marginStart="5dp" />
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

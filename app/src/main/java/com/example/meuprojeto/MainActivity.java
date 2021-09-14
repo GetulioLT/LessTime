@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     tProgressBar.setVisibility(View.VISIBLE);
 
                     //Usuario padrão para cadastro
-                    if ((Email.equals("admin@admin.com") && Senha.equals("123456"))) {
+                    if ((Email.equals("admin@lesstime.com") && Senha.equals("123456"))) {
                         alert(mensagens[1]);
                         Intent it = new Intent(MainActivity.this, cadastroteste.class);
                         startActivity(it);

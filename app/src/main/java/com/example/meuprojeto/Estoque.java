@@ -27,7 +27,6 @@ public class Estoque extends AppCompatActivity {
     RecyclerView produtos_list;
     FirebaseDatabase FirebaseDatabase;
     DatabaseReference reference;
-    //Myadapter Myadapter;
     List<Estoque_info> list;
 
     private Estoque_Adapter estoque_adapter;

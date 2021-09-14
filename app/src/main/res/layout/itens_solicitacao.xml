@@ -6,9 +6,9 @@
     android:layout_height="120dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@color/Padrão"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/Imagem_list_solicitação"
             android:layout_width="90dp"
             android:layout_height="match_parent"
             android:layout_margin="3dp"
@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/Nome_list_solicitação"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Nome:" />
@@ -42,45 +42,39 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/Quantidade_list_solicitação"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:hint="@string/Quantidade" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/imageButton7"
-                        android:layout_width="25sp"
-                        android:layout_height="25sp"
-                        app:srcCompat="@drawable/mais" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton8"
-                        android:layout_width="25sp"
-                        android:layout_height="25sp"
-                        app:srcCompat="@drawable/menos" />
-                </LinearLayout>
+                    android:orientation="vertical" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/Codigo_list_solicitação"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/Código" />
 
         </LinearLayout>
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
         <ImageButton
-            android:id="@+id/imageButton10"
+            android:id="@+id/Delete_produto"
             android:layout_width="25sp"
             android:layout_height="25sp"
-            android:layout_marginStart="100dp"
             android:layout_marginTop="3dp"
+            android:layout_marginEnd="5dp"
             app:srcCompat="@android:drawable/ic_menu_delete" />
 
     </LinearLayout>

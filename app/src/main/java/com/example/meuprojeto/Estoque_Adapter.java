@@ -11,13 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Estoque_Adapter extends RecyclerView.Adapter<Estoque_Adapter.ViewHolderEstoque> {
 
     private List<Estoque_info> dados;
 
+    public Estoque_Adapter(Historico_Entrada estoque, List<Estoque_info> dados){
+        this.dados = dados;
+    }
     public Estoque_Adapter(Estoque estoque, List<Estoque_info> dados){
         this.dados = dados;
     }

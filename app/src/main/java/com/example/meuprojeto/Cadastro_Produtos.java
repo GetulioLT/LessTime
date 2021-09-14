@@ -43,6 +43,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
     Produtos_Info Produtos_Info;
     Estoque_info Estoque_info;
     Pesquisa_info Pesquisa_info;
+    Tela_dos_pedidos_info1 Tela_dos_pedidos_info1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
         Produtos_Info = new Produtos_Info();
         Estoque_info = new Estoque_info();
         Pesquisa_info = new Pesquisa_info();
+        Tela_dos_pedidos_info1 = new Tela_dos_pedidos_info1();
 
         //Voltar para tela de pedidos
         BtnVoltar_CadastroP.setOnClickListener(new View.OnClickListener() {
@@ -108,8 +110,10 @@ public class Cadastro_Produtos extends AppCompatActivity {
                                 Produtos_Info.salvar();
                                 alert(mensagens[0]);
                             }
-                            LimparCampos();
                             ProgressBarP.setVisibility(View.INVISIBLE);
+                            Intent it = new Intent(Cadastro_Produtos.this, Cadastro_Produtos.class);
+                            startActivity(it);
+                            finish();
                         }
                     },4000);
                 }
@@ -163,7 +167,7 @@ public class Cadastro_Produtos extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         Url = uri.toString();
-                        Log.d("dyww ulr", uri.toString());
+                        Log.d("dyww url", uri.toString());
                     }
                 });
             }
@@ -191,6 +195,13 @@ public class Cadastro_Produtos extends AppCompatActivity {
         setEstoque();
 
         setPesquisa();
+
+        setTeladepedidos();
+    }
+
+    private void setTeladepedidos() {
+        Tela_dos_pedidos_info1.setDescrição(EdtCadastro_Descrição.getText().toString());
+        Tela_dos_pedidos_info1.setLocal(EdtCadastro_Local.getText().toString());
     }
 
     private void setPesquisa() {

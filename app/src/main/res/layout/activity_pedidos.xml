@@ -50,6 +50,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/Nome_almo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -141,9 +142,60 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/List_tela_de_pedidos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp" />
+
+            <TextView
+                android:id="@+id/quant_hist"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/prod_hist"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/nome_hist"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/descrião_hist"
+                android:layout_width="1sp"
+                android:layout_height="1dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/imagem_hist"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/Codigo_hist"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/Nome_pegar"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:text="TextView" />
+
+            <Button
+                android:id="@+id/Aceitar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_weight="0"
+                android:text="Aceitar" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
