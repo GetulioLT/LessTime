@@ -1,7 +1,6 @@
 package com.example.meuprojeto;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,13 +68,13 @@ public class Tela_dos_pedidos_Adapter extends RecyclerView.Adapter
         public ViewHolderTela_dos_pedidos(@NonNull View itemView, Context context) {
             super(itemView);
 
-            NomeSoli = itemView.findViewById(R.id.NomeSoli);
-            ProdutoSoli = itemView.findViewById(R.id.ProdutoSoli);
-            Quantidadesoli = itemView.findViewById(R.id.Quantidadesoli);
-            CodigoSoli = itemView.findViewById(R.id.CodigoSoli);
+            NomeSoli = itemView.findViewById(R.id.Soli_Nome);
+            ProdutoSoli = itemView.findViewById(R.id.Soli_Produto);
+            Quantidadesoli = itemView.findViewById(R.id.Soli_Quantidade);
+            CodigoSoli = itemView.findViewById(R.id.Soli_Codigo);
 
-            DescriçãoSoli = itemView.findViewById(R.id.DescriçãoSoli);
-            Image_soli = itemView.findViewById(R.id.Image_soli);
+            DescriçãoSoli = itemView.findViewById(R.id.Soli_Local);
+            Image_soli = itemView.findViewById(R.id.Soli_Imagem);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

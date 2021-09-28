@@ -121,7 +121,7 @@
                         android:backgroundTint="@color/Branco"
                         android:ems="10"
                         android:hint="Código"
-                        android:inputType="text" />
+                        android:inputType="number" />
                 </LinearLayout>
 
                 <ImageView

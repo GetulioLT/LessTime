@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -42,20 +44,23 @@ public class Solicitacao extends AppCompatActivity {
     Button BtnDeslogar_Solicitação, BtnAddP_Solicitação, BtnEnviar_Solicitação,
             BtnCancelar_Solicitação, Btn_popup;
     TextView Nome_Solicitante, Nome_Produto_Soli, Codigo_Produto_Soli, Quantidade_Estoque,
-            Url_Produto_Solicitação, descrição_prod;
+            Url_Produto_Solicitação, descrição_prod, nome_p_almo, quantidade_p_almo, codigo_p_almo;
     EditText Quantidade_Soli;
-    ImageView Imagem_Produto_Soli;
+    ImageView Imagem_Produto_Soli, imagem_p_almo;
     RecyclerView solicitação_list;
     AlertDialog.Builder dialogbuilder;
     AlertDialog dialog;
+    LinearLayout invisi;
     FirebaseFirestore bd = FirebaseFirestore.getInstance();
-    String UsuarioID;
+    String UsuarioID, Imagem;
     View codigo;
     final String[] mensagens = {"Produto não Selecionado", "Quantidade Maior que no Estoque"
-            , "Adicione um Valor Para Solicitar"};
+            , "Adicione um Valor Para Solicitar", "Produto Solicitado Com Sucesso"};
     Solicitação_info Solicitação_info;
     List<Solicitação_info> list;
     Solicitação_Adapter solicitação_adapter;
+    FirebaseDatabase database;
+    ValueEventListener valueEventListener;
     DatabaseReference reference;
     Tela_dos_pedidos_info1 Tela_dos_pedidos_info1;
 
@@ -68,7 +73,9 @@ public class Solicitacao extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
-        new Handler().postDelayed(new Runnable() {
+        database = FirebaseDatabase.getInstance();
+
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 reference = FirebaseDatabase.getInstance().getReference("Produtos Lista Solicitação")
@@ -96,11 +103,11 @@ public class Solicitacao extends AppCompatActivity {
                     }
                 });
             }
-        },1000);
+        },1000);*/
 
         IniciarComponentes();
 
-
+        invisi.setVisibility(View.INVISIBLE);
         //Voltar Tela Inicial
         BtnDeslogar_Solicitação.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +133,7 @@ public class Solicitacao extends AppCompatActivity {
 
         ProdutoSelecionado();
 
+
         BtnAddP_Solicitação.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,7 +152,18 @@ public class Solicitacao extends AppCompatActivity {
                         if (Quantidade_solicitada.equals(Quantidade_estoque + 1)) {
                             alert(mensagens[1]);
                         } else {
-                            ListaProduto();
+                            invisi.setVisibility(View.VISIBLE);
+
+                            nome_p_almo.setText(Nome_produto);
+                            quantidade_p_almo.setText(Quantidade_solicitada);
+                            codigo_p_almo.setText(Codigo_produto);
+                            Picasso.get().load(Imagem).into(imagem_p_almo);
+
+
+
+                            LimparConteudo();
+
+                            /*istaProduto();
 
                             if (!TextUtils.isEmpty(Solicitação_info.getNome_Produto())
                                     && !TextUtils.isEmpty(Solicitação_info.getQuantidade_Produto())
@@ -153,10 +172,8 @@ public class Solicitacao extends AppCompatActivity {
                                     && !TextUtils.isEmpty(Solicitação_info.getNome_Solicitante())){
                                 Solicitação_info.SalvarListaSolicitação();
                                 Tela_dos_pedidos_info1.salvarTelaDePedidos();
-                                Intent it = new Intent(Solicitacao.this, Solicitacao.class);
-                                startActivity(it);
-                                finish();
-                            }
+
+                            }*/
                         }
                     }
                 }
@@ -178,14 +195,27 @@ public class Solicitacao extends AppCompatActivity {
         BtnEnviar_Solicitação.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseDatabase.getInstance().getReference("Produtos Lista Solicitação")
-                        .child(Nome_Solicitante.getText().toString()).removeValue();
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+                reference.child("Produtos Lista Solicitação").child("Nome").setValue(Nome_Solicitante.getText());
+                reference.child("Produtos Lista Solicitação").child("Quantidade").setValue(quantidade_p_almo.getText());
+                reference.child("Produtos Lista Solicitação").child("Código").setValue(codigo_p_almo.getText());
+                reference.child("Produtos Lista Solicitação").child("Imagem").setValue(Url_Produto_Solicitação.getText());
+                reference.child("Produtos Lista Solicitação").child("Descrição").setValue(descrição_prod.getText());
+                reference.child("Produtos Lista Solicitação").child("Produto").setValue(nome_p_almo.getText());
+                reference.child("Produtos Lista Solicitação").child("Show").setValue("1");
+                invisi.setVisibility(View.INVISIBLE);
 
-                Intent it = new Intent(Solicitacao.this, Solicitacao.class);
-                startActivity(it);
-                finish();
             }
         });
+    }
+
+    private void LimparConteudo() {
+        Nome_Produto_Soli.setText("Nome:");
+        Quantidade_Soli.getText().clear();
+        Codigo_Produto_Soli.setText("Código:");
+        Picasso.get()
+                .load("https://firebasestorage.googleapis.com/v0/b/lesstime-2f103.appspot.com/o/image%2F25d47c35-239b-497f-8563-96e583863ac6?alt=media&token=93a6f392-c856-4835-a462-46b5fa72e4dc")
+                .into(Imagem_Produto_Soli);
     }
 
     private void EviarAlmo() {
@@ -221,6 +251,7 @@ public class Solicitacao extends AppCompatActivity {
             descrição_prod.setText(produto_pesq.Descrição);
 
             Picasso.get().load(produto_pesq.Imagem).into(Imagem_Produto_Soli);
+            Imagem = produto_pesq.Imagem;
         }
     }
 
@@ -238,7 +269,7 @@ public class Solicitacao extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot,
                                 @Nullable FirebaseFirestoreException error) {
                 if (documentSnapshot != null){
-                    Nome_Solicitante.setText(documentSnapshot.getString("Nome"));
+                    Nome_Solicitante.setText( documentSnapshot.getString("Nome"));
 
                     Log.d("dyww nome", Nome_Solicitante.getText().toString());
                 }
@@ -274,7 +305,6 @@ public class Solicitacao extends AppCompatActivity {
         BtnAddP_Solicitação = findViewById(R.id.BtnAddP_Solicitação);
         BtnEnviar_Solicitação = findViewById(R.id.BtnEnviar_Solicitação);
         BtnCancelar_Solicitação = findViewById(R.id.BtnCancelar_Solicitação);
-        solicitação_list = findViewById(R.id.Solicitação_list);
         Btn_popup = findViewById(R.id.Btn_popup);
         Nome_Solicitante = findViewById(R.id.Nome_Solicitante);
         Nome_Produto_Soli = findViewById(R.id.Nome_Produto_Soli);
@@ -284,11 +314,16 @@ public class Solicitacao extends AppCompatActivity {
         Quantidade_Estoque = findViewById(R.id.Quantidade_Estoque);
         Url_Produto_Solicitação = findViewById(R.id.Url_Produto_Solicitação);
         descrição_prod = findViewById(R.id.descrição_prod);
+        nome_p_almo = findViewById(R.id.nome_p_almo);
+        codigo_p_almo = findViewById(R.id.codigo_p_almo);
+        quantidade_p_almo = findViewById(R.id.quantidade_p_almo);
+        imagem_p_almo = findViewById(R.id.imagem_p_almo);
+        invisi = findViewById(R.id.invisi);
 
         list = new ArrayList<Solicitação_info>();
         solicitação_adapter = new Solicitação_Adapter(this, list);
 
-        codigo = findViewById(R.id.Codigo_list_solicitação);
+        codigo = findViewById(R.id.codigo_p_almo);
     }
 
     private void alert(String s){

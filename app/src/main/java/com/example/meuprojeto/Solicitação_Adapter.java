@@ -1,6 +1,5 @@
 package com.example.meuprojeto;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -66,10 +63,10 @@ public class Solicitação_Adapter extends RecyclerView.Adapter<Solicitação_Ad
         public ViewHolderSolicitação(@NonNull View itemView) {
             super(itemView);
 
-            Nome_list_solicitação = itemView.findViewById(R.id.Nome_list_solicitação);
-            Quantidade_list_solicitação = itemView.findViewById(R.id.Quantidade_list_solicitação);
-            Codigo_list_solicitação = itemView.findViewById(R.id.Codigo_list_solicitação);
-            Imagem_list_solicitação = itemView.findViewById(R.id.Imagem_list_solicitação);
+            Nome_list_solicitação = itemView.findViewById(R.id.nome_p_almo);
+            Quantidade_list_solicitação = itemView.findViewById(R.id.quantidade_p_almo);
+            Codigo_list_solicitação = itemView.findViewById(R.id.codigo_p_almo);
+            Imagem_list_solicitação = itemView.findViewById(R.id.imagem_p_almo);
             Delete_produto = itemView.findViewById(R.id.Delete_produto);
             Nome_Solicitante = itemView.findViewById(R.id.Nome_Solicitante);
         }
